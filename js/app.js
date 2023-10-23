@@ -18,7 +18,7 @@ document.getElementById('loginForm').addEventListener('submit', async () => {
       .then(response => response.json())
       .then(data => {
         localStorage.setItem('userId', data.userId)
-        window.location.href = 'dashboard.html'
+        window.location.href = './dashboard.html'
       })
   } catch (err) {
     console.error(err)

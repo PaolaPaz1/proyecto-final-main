@@ -1,5 +1,5 @@
 import express from 'express'
-import knex from 'knex'
+import mysql from 'mysql2/promise'
 import cors from 'cors'
 
 const app = express()
@@ -10,28 +10,29 @@ const corsOptions = {
   origin: '*'
 }
 
-const db = knex({
-  client: 'mysql2',
-  connection: {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'users_crud_php'
-  }
+const db = await mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'users_crud_php'
 })
 
 app.get('/user', cors(corsOptions), async (req, res) => {
+  const userId = req.query.id
+  if (!userId) return res.status(400).send('User ID not provided')
+
   try {
-    const userId = req.query.id
-    if (!userId) return res.status(400).send('User ID not provided')
+    const [user] = await db.execute(
+      `SELECT 
+        name,
+        lastname,
+        email
+      FROM users
+      WHERE id = ?`, [userId]
+    )
 
-    const user = await db
-      .select('name', 'lastname', 'password', 'email')
-      .from('users')
-      .where({ id: userId })
-      .first()
+    if (user.length === 0) return res.status(404).send('User not found')
 
-    if (!user) return res.status(404).send('User not found')
     res.json(user)
   } catch (err) {
     console.error(err)
@@ -40,16 +41,21 @@ app.get('/user', cors(corsOptions), async (req, res) => {
 })
 
 app.post('/login', cors(corsOptions), async (req, res) => {
-  try {
-    const { email, password } = req.body
-    const user = await db
-      .select('id', 'name', 'email')
-      .from('users')
-      .where({ email, password })
-      .first()
+  const { email, password } = req.body
 
-    if (!user) return res.status(401).send('User not found')
-    res.json({ userId: user.id })
+  try {
+    const [user] = await db.execute(
+      `SELECT
+        id,
+        name,
+        email
+      FROM users
+      WHERE email = ? AND password = ?`, [email, password]
+    )
+
+    if (user.length === 0) return res.status(401).send('User not found')
+
+    res.json({ userId: user[0].id })
   } catch (err) {
     console.error(err)
     res.status(500).send(`Error: ${err}`)

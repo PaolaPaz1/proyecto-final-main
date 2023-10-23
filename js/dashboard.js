@@ -34,10 +34,13 @@ const getUser = async () => {
   })
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       const p = document.createElement('p')
-      p.innerHTML = `
-        <p class="text">Name: ${data.name} || Email: ${data.email}</p>
-      `
+      data.forEach(data => {
+        p.innerHTML = `
+          <p class="text">Name: ${data.name} ${data.lastname} || Email: ${data.email}</p>
+        `
+      })
       return home.appendChild(p)
     })
 }

@@ -3,11 +3,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/dashboard.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <script>
         const userId = localStorage.getItem('userId')
-        if (!userId) window.location.href = 'index.html'
+        if (!userId) window.location.href = '../index.html'
     </script>
     <title>MoneyMinder | Inicio</title> 
 </head>
@@ -16,7 +16,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="images/cerdo.png" alt="">
+                    <img src="../images/cerdo.png" alt="">
                 </span>
 
                 
@@ -93,7 +93,7 @@
                                 // Realiza las acciones de cierre de sesión aquí
                                 // Redirige al usuario a la página de inicio de sesión
                                 localStorage.removeItem('userId')
-                                window.location.href = "index.html";
+                                window.location.href = "../index.html";
                             });
                     </script>
                     
@@ -118,7 +118,7 @@
         <div class="text">Barra lateral del tablero</div>
     </section>
 
-    <script src="dashboard.js" type="module"></script>
+    <script src="../js/dashboard.js" type="module"></script>
 
     <script>
         // Función para cerrar sesión
