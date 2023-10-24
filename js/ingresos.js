@@ -22,3 +22,27 @@ modeSwitch.addEventListener('click', () => {
     modeText.innerText = 'Dark mode'
   }
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+  const ingresoForm = document.getElementById('ingresoForm')
+  const mensajeExito = document.getElementById('mensajeExito')
+  const mensajeError = document.getElementById('mensajeError')
+
+  ingresoForm.addEventListener('submit', function (event) {
+    event.preventDefault()
+
+    const monto = parseFloat(document.getElementById('monto').value)
+    const descripcion = document.getElementById('descripcion').value
+
+    if (isNaN(monto)) {
+      mensajeError.textContent = 'Por favor, ingrese un monto válido.'
+    } else {
+      // Aquí puedes realizar cualquier acción adicional, como enviar los datos a un servidor.
+      // Por ahora, simplemente mostramos un mensaje de éxito.
+      mensajeError.textContent = ''
+      mensajeExito.textContent = 'Ingreso registrado con éxito: $' + monto.toFixed(2)
+      // También puedes resetear el formulario después de enviarlo.
+      ingresoForm.reset()
+    }
+  })
+})
