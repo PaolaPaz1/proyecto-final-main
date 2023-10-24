@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npm-run-all --parallel api dev",
-    "api": "node ./db/app.js",
+    "api": "node --watch ./db/app.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

@@ -62,5 +62,33 @@ app.post('/login', cors(corsOptions), async (req, res) => {
   }
 })
 
+app.post('/register', cors(corsOptions), async (req, res) => {
+  const { name, lastname, email, password } = req.body
+  console.log(name, lastname, email, password)
+
+  try {
+    const [user] = await db.execute(
+      `SELECT
+        id
+      FROM users
+      WHERE email = ?`, [email]
+    )
+
+    if (user.length > 0) return res.status(409).json({ message: 'User already exists' })
+
+    await db.execute(
+      `INSERT INTO users
+        (name, lastname, email, password)
+      VALUES
+        (?, ?, ?, ?)`, [name, lastname, email, password]
+    )
+
+    res.json({ message: 'User created' })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(`Error: ${err}`)
+  }
+})
+
 const PORT = process.env.PORT ?? 3000
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
