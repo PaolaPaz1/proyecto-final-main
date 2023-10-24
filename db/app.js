@@ -64,7 +64,6 @@ app.post('/login', cors(corsOptions), async (req, res) => {
 
 app.post('/register', cors(corsOptions), async (req, res) => {
   const { name, lastname, email, password } = req.body
-  console.log(name, lastname, email, password)
 
   try {
     const [user] = await db.execute(
