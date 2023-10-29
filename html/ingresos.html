@@ -112,10 +112,28 @@
 				</div>
 			</div>
 		</nav>
+		<br>
 		<h1>Registro de Ingresos</h1>
 		<form id="ingresoForm">
+			<label for="fecha">Fecha del Monto</label>
+			<input type="date" id="fecha" name="fecha" required>
+			
 			<label for="monto">Monto del ingreso:</label>
 			<input type="number" id="monto" name="monto" required />
+
+			<label for="categora">Categor&iacute;a del Ingreso</label>
+			<select name="categorias" id="categorias" required>
+				<option value="Ingreso Laboral">Ingreso Laboral</option>
+				<option value="Ingreso de Negocios">Ingreso de Negocios</option>
+				<option value="Ingreso Familiar">Ingreso Familiar</option>
+				<option value="Ingreso de Inversiones">Ingreso de Inversiones</option>
+				<option value="Ingreso de Propiedades">Ingreso de Propiedades</option>
+				<option value="Ingreso por Trabajos Independientes">Ingreso por Trabajos Independientes</option>
+				<option value="Ingreso por Subsidios o Becas">Ingreso por Subsidios o Becas</option>
+				<option value="Ingreso por Prestaciones">Ingreso por Prestaciones</option>
+				<option value="Ingreso de Pension">Ingreso de Pensi&oacute;n</option>
+				<option value="Ingresos Adicionales">Ingresos Adicionales</option>
+			</select>
 
 			<label for="descripcion">Descripción del ingreso:</label>
 			<input type="text" id="descripcion" name="descripcion" required />
