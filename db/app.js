@@ -89,5 +89,45 @@ app.post('/register', cors(corsOptions), async (req, res) => {
   }
 })
 
+app.post('/income', cors(corsOptions), async (req, res) => {
+  const { userId, amount, description, category } = req.body
+  const currentDate = new Date()
+  const { formattedDate } = currentDate.toISOString().slice(0, 19).replace('T', ' ')
+
+  try {
+    await db.execute(
+      `INSERT INTO incomes
+        (id_usuario, monto, descripcion, categoria, fecha)
+      VALUES
+        (?, ?, ?, ?, ?)`, [userId, amount, description, category, formattedDate]
+    )
+
+    res.json({ message: 'Income created' })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(`Error: ${err}`)
+  }
+})
+
+app.post('/expenses', cors(corsOptions), async (req, res) => {
+  const { userId, amount, description, category } = req.body
+  const currentDate = new Date()
+  const { formattedDate } = currentDate.toISOString().slice(0, 19).replace('T', ' ')
+
+  try {
+    await db.execute(
+      `INSERT INTO expenses
+        (id_usuario, monto, descripcion, categoria, fecha)
+      VALUES
+        (?, ?, ?, ?, ?)`, [userId, amount, description, category, formattedDate]
+    )
+
+    res.json({ message: 'Expenses created' })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(`Error: ${err}`)
+  }
+})
+
 const PORT = process.env.PORT ?? 3000
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
