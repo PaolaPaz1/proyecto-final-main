@@ -13,7 +13,7 @@
 			const userId = localStorage.getItem("userId");
 			if (!userId) window.location.href = "../index.html";
 		</script>
-		<script src="../js/gastos.js" defer></script>
+		<script src="../js/gastos.js" type="module" defer></script>
 	</head>
 	<body>
 		<nav class="sidebar close">
@@ -145,5 +145,6 @@
 
 		<p id="mensajeExito" style="color: green"></p>
 		<p id="mensajeError" style="color: red"></p>
+		<div id="myId"></div>
 	</body>
 </html>

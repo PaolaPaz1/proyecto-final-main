@@ -1,3 +1,6 @@
+import { getExpenses } from './utils'
+getExpenses('myId')
+
 const body = document.querySelector('body')
 const sidebar = body.querySelector('nav')
 const toggle = body.querySelector('.toggle')
@@ -52,8 +55,15 @@ document.getElementById('egresoForm').addEventListener('submit', async (e) => {
     .then(response => response.json())
     .then(data => {
       mensajeExito.innerHTML = data.message
+      setInterval(() => {
+        mensajeExito.innerHTML = ''
+      }, 2000)
+      getExpenses('myId')
     })
     .catch(err => {
       mensajeError.innerHTML = err.message
+      setInterval(() => {
+        mensajeError.innerHTML = ''
+      }, 2000)
     })
 })
