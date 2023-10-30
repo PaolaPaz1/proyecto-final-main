@@ -1,4 +1,13 @@
 function createTable (data, divId) {
+  if (data.length === 0) {
+    const targetDiv = document.getElementById(divId)
+    targetDiv.innerHTML = ''
+    const p = document.createElement('p')
+    p.textContent = 'Sin datos por mostrar'
+    targetDiv.appendChild(p)
+    return
+  }
+
   // Create a table element
   const table = document.createElement('table')
   table.classList.add('custom-table')
