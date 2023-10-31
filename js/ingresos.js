@@ -40,7 +40,7 @@ document.getElementById('ingresoForm').addEventListener('submit', async (e) => {
     date
   }
 
-  await fetch('http://localhost:3000/income', {
+  await fetch('http://localhost:3000/incomes/new-income', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

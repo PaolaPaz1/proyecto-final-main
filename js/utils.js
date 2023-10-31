@@ -48,7 +48,7 @@ function createTable (data, divId) {
 }
 
 export function getIncome (divId) {
-  fetch('http://localhost:3000/get-income', {
+  fetch('http://localhost:3000/incomes/get-incomes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
