@@ -3,11 +3,11 @@ import UserController from '../controllers/userController.js'
 import cors from 'cors'
 import corsOptions from '../middleware/corsConfig.js'
 
-const router = express.Router()
+const routerUser = express.Router()
 const userController = new UserController()
 
-router.get('/user', cors(corsOptions), userController.getUser)
-router.post('/login', cors(corsOptions), userController.loginUser)
-router.post('/register', cors(corsOptions), userController.registerUser)
+routerUser.get('/user', cors(corsOptions), userController.getUser)
+routerUser.post('/login', cors(corsOptions), userController.loginUser)
+routerUser.post('/register', cors(corsOptions), userController.registerUser)
 
-export default router
+export default routerUser

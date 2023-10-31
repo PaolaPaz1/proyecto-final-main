@@ -63,7 +63,7 @@ export function getIncome (divId) {
 }
 
 export function getExpenses (divId) {
-  fetch('http://localhost:3000/get-expenses', {
+  fetch('http://localhost:3000/expenses/get-expenses', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

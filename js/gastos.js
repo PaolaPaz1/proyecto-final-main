@@ -40,7 +40,7 @@ document.getElementById('egresoForm').addEventListener('submit', async (e) => {
     date
   }
 
-  await fetch('http://localhost:3000/expenses', {
+  await fetch('http://localhost:3000/expenses/new-expense', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -61,4 +61,6 @@ document.getElementById('egresoForm').addEventListener('submit', async (e) => {
         mensajeError.innerHTML = ''
       }, 2000)
     })
+
+  e.target.reset()
 })
