@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const data = { email, password }
 
   try {
-    await fetch('http://localhost:3000/login', {
+    await fetch('http://localhost:3000/users/login', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

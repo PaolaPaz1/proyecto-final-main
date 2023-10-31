@@ -9,7 +9,7 @@ document.getElementById('form').addEventListener('submit', async (e) => {
   const data = { name, lastname, email, password }
 
   try {
-    const response = await fetch('http://localhost:3000/register', {
+    const response = await fetch('http://localhost:3000/users/register', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' }

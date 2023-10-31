@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/', router)
+app.use('/users', router)
 
 /* app.post('/income', cors(corsOptions), async (req, res) => {
   const { userId, amount, description, category, date } = req.body

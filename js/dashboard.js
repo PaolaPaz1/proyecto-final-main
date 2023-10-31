@@ -21,7 +21,7 @@ modeSwitch.addEventListener('click', () => {
 })
 
 const getUser = async () => {
-  await fetch(`http://localhost:3000/user?id=${userId}`, {
+  await fetch(`http://localhost:3000/users/user?id=${userId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
