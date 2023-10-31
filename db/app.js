@@ -90,16 +90,14 @@ app.post('/register', cors(corsOptions), async (req, res) => {
 })
 
 app.post('/income', cors(corsOptions), async (req, res) => {
-  const { userId, amount, description, category } = req.body
-  const currentDate = new Date()
-  const { formattedDate } = currentDate.toISOString().slice(0, 19).replace('T', ' ')
+  const { userId, amount, description, category, date } = req.body
 
   try {
     await db.execute(
-      `INSERT INTO incomes
+      `INSERT INTO income
         (id_usuario, monto, descripcion, categoria, fecha)
       VALUES
-        (?, ?, ?, ?, ?)`, [userId, amount, description, category, formattedDate]
+        (?, ?, ?, ?, ?)`, [userId, amount, description, category, date]
     )
 
     res.json({ message: 'Income created' })
@@ -110,19 +108,59 @@ app.post('/income', cors(corsOptions), async (req, res) => {
 })
 
 app.post('/expenses', cors(corsOptions), async (req, res) => {
-  const { userId, amount, description, category } = req.body
-  const currentDate = new Date()
-  const { formattedDate } = currentDate.toISOString().slice(0, 19).replace('T', ' ')
+  const { userId, amount, description, category, date } = req.body
 
   try {
     await db.execute(
       `INSERT INTO expenses
         (id_usuario, monto, descripcion, categoria, fecha)
       VALUES
-        (?, ?, ?, ?, ?)`, [userId, amount, description, category, formattedDate]
+        (?, ?, ?, ?, ?)`, [userId, amount, description, category, date]
     )
 
-    res.json({ message: 'Expenses created' })
+    res.json({ message: 'Expense created' })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(`Error: ${err}`)
+  }
+})
+
+app.post('/get-income', cors(corsOptions), async (req, res) => {
+  const { userId } = req.body
+
+  try {
+    const [income] = await db.execute(
+      `SELECT
+        monto,
+        categoria,
+        descripcion,
+        fecha
+      FROM income
+      WHERE id_usuario = ?`, [userId]
+    )
+
+    res.json(income)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(`Error: ${err}`)
+  }
+})
+
+app.post('/get-expenses', cors(corsOptions), async (req, res) => {
+  const { userId } = req.body
+
+  try {
+    const [expenses] = await db.execute(
+      `SELECT
+        monto,
+        categoria,
+        descripcion,
+        fecha
+      FROM expenses
+      WHERE id_usuario = ?`, [userId]
+    )
+
+    res.json(expenses)
   } catch (err) {
     console.error(err)
     res.status(500).send(`Error: ${err}`)

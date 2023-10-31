@@ -1,9 +1,14 @@
+import { getIncome } from './utils'
+getIncome('myId')
+
 const body = document.querySelector('body')
 const sidebar = body.querySelector('nav')
 const toggle = body.querySelector('.toggle')
 const searchBtn = body.querySelector('.search-box')
 const modeSwitch = body.querySelector('.toggle-switch')
 const modeText = body.querySelector('.mode-text')
+const mensajeExito = document.getElementById('mensajeExito')
+const mensajeError = document.getElementById('mensajeError')
 
 toggle.addEventListener('click', () => {
   sidebar.classList.toggle('close')
@@ -23,26 +28,42 @@ modeSwitch.addEventListener('click', () => {
   }
 })
 
-document.addEventListener('DOMContentLoaded', function () {
-  const ingresoForm = document.getElementById('ingresoForm')
-  const mensajeExito = document.getElementById('mensajeExito')
-  const mensajeError = document.getElementById('mensajeError')
+document.getElementById('ingresoForm').addEventListener('submit', async (e) => {
+  e.preventDefault()
 
-  ingresoForm.addEventListener('submit', function (event) {
-    event.preventDefault()
+  const userId = localStorage.getItem('userId')
+  const amount = document.getElementById('monto').value
+  const description = document.getElementById('descripcion').value
+  const category = document.getElementById('categorias').value
+  const date = document.getElementById('fecha').value
 
-    const monto = parseFloat(document.getElementById('monto').value)
-    const descripcion = document.getElementById('descripcion').value
+  const data = {
+    userId,
+    amount,
+    description,
+    category,
+    date
+  }
 
-    if (isNaN(monto)) {
-      mensajeError.textContent = 'Por favor, ingrese un monto válido.'
-    } else {
-      // Aquí puedes realizar cualquier acción adicional, como enviar los datos a un servidor.
-      // Por ahora, simplemente mostramos un mensaje de éxito.
-      mensajeError.textContent = ''
-      mensajeExito.textContent = 'Ingreso registrado con éxito: $' + monto.toFixed(2)
-      // También puedes resetear el formulario después de enviarlo.
-      ingresoForm.reset()
-    }
+  await fetch('http://localhost:3000/income', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
   })
+    .then(response => response.json())
+    .then(data => {
+      mensajeExito.innerHTML = data.message
+      setInterval(() => {
+        mensajeExito.innerHTML = ''
+      }, 2000)
+      getIncome('myId')
+    })
+    .catch(err => {
+      mensajeError.innerHTML = err.message
+      setInterval(() => {
+        mensajeError.innerHTML = ''
+      }, 2000)
+    })
 })
