@@ -29,7 +29,6 @@ const getUser = async () => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       const p = document.createElement('p')
       data.forEach(data => {
         p.innerHTML = `
