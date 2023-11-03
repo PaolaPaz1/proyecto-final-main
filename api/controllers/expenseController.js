@@ -25,6 +25,19 @@ class ExpenseController {
       res.status(500).json({ error: err.message })
     }
   }
+
+  async getLimitedExpenses (req, res) {
+    const { userId } = req.body
+
+    try {
+      const [expenses] = await Expense.getLimitedExpenses(userId)
+
+      res.json(expenses)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
 }
 
 export default ExpenseController

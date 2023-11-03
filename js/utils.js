@@ -1,4 +1,4 @@
-function createTable (data, divId) {
+function createTable (data, divId, limited = false) {
   if (data.length === 0) {
     const targetDiv = document.getElementById(divId)
     targetDiv.innerHTML = ''
@@ -41,6 +41,16 @@ function createTable (data, divId) {
     table.appendChild(row)
   })
 
+  if (limited) {
+    const limitedRow = document.createElement('tr')
+    const td = document.createElement('td')
+    td.setAttribute('colspan', Object.keys(data[0]).length)
+    td.textContent = `Mostrando solo ${data.length} resultados de mayor cantidad`
+    td.style.textAlign = 'center'
+    limitedRow.appendChild(td)
+    table.appendChild(limitedRow)
+  }
+
   // Add the table to the specified DOM element
   const targetDiv = document.getElementById(divId)
   targetDiv.innerHTML = ''
@@ -62,8 +72,10 @@ export function getIncome (divId) {
     .catch(err => console.error(err))
 }
 
-export function getExpenses (divId) {
-  fetch('http://localhost:3000/expenses/get-expenses', {
+export function getExpenses (divId, limited = false) {
+  const endpoint = limited ? 'get-limited-expenses' : 'get-expenses'
+
+  fetch(`http://localhost:3000/expenses/${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -72,7 +84,7 @@ export function getExpenses (divId) {
   })
     .then(response => response.json())
     .then(data => {
-      createTable(data, divId)
+      createTable(data, divId, limited)
     })
     .catch(err => console.error(err))
 }

@@ -1,6 +1,6 @@
 import { getIncome, getExpenses } from './utils'
 getIncome('tabla1')
-getExpenses('tabla2')
+getExpenses('tabla2', true)
 
 const body = document.querySelector('body')
 const sidebar = body.querySelector('nav')

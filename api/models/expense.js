@@ -23,6 +23,22 @@ class Expense {
 
     return expenses
   }
+
+  static async getLimitedExpenses (userId) {
+    const expenses = await db.execute(
+      `SELECT
+        monto,
+        categoria,
+        descripcion,
+        fecha
+      FROM expenses
+      WHERE id_usuario = ?
+      ORDER BY monto DESC
+      LIMIT 5`, [userId]
+    )
+
+    return expenses
+  }
 }
 
 export default Expense
