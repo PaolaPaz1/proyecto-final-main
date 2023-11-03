@@ -1,0 +1,65 @@
+/* Estilos base para tu etiqueta main y las tablas */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Espacio entre las tablas y el resumen de datos */
+}
+
+/* Estilos para las tablas */
+table {
+  width: 100%; /* O un ancho específico si así lo deseas */
+  max-width: 500px; /* Esto evita que las tablas sean demasiado anchas en pantallas grandes */
+}
+
+/* Estilos para el resumen de datos */
+.resumen {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  text-align: center; /* Centra el texto dentro del div resumen */
+}
+
+/* Estilos para las recomendaciones */
+.recomendaciones {
+  width: 100%;
+  text-align: center;
+}
+
+/* Media queries para pantallas más pequeñas, como teléfonos */
+@media (max-width: 768px) { /* 768px es un punto de quiebre común para dispositivos móviles */
+  main {
+    flex-direction: column; /* Esto apila los elementos verticalmente */
+  }
+}
+
+/* Estilo para la tabla */
+
+#myId {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-table {
+  border-collapse: collapse;
+  width: 50%;
+  margin: 15px auto;
+}
+
+.custom-table th, .custom-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.custom-table tr:nth-child(odd) {
+  background-color: #fff;
+}
