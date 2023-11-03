@@ -8,5 +8,6 @@ const incomeController = new IncomeController()
 
 routerIncome.post('/new-income', cors(corsOptions), incomeController.newIncome)
 routerIncome.post('/get-incomes', cors(corsOptions), incomeController.getIncome)
+routerIncome.post('/get-limited-incomes', cors(corsOptions), incomeController.getLimitedIncome)
 
 export default routerIncome

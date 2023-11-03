@@ -61,4 +61,6 @@ document.getElementById('ingresoForm').addEventListener('submit', async (e) => {
         mensajeError.innerHTML = ''
       }, 2000)
     })
+
+  e.target.reset()
 })

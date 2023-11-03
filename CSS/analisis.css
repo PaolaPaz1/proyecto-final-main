@@ -4,6 +4,8 @@ main {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px; /* Espacio entre las tablas y el resumen de datos */
+  align-items: flex-start center;
+  margin: 15px 0;
 }
 
 /* Estilos para las tablas */
@@ -33,16 +35,17 @@ table {
 
 /* Estilo para la tabla */
 
-#myId {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .custom-table {
   border-collapse: collapse;
   width: 50%;
-  margin: 15px auto;
+}
+
+/* Estilo para los contenedores de las tablas */
+#tabla1, #tabla2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea la tabla al inicio (parte superior) del contenedor div */
+  height: 100%; /* Opcional: Esto hará que el div tome todo el espacio vertical disponible. Puedes ajustar este valor según tus necesidades. */
 }
 
 .custom-table th, .custom-table td {

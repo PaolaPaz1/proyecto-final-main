@@ -25,6 +25,19 @@ class IncomeController {
       res.status(500).json({ error: err.message })
     }
   }
+
+  async getLimitedIncome (req, res) {
+    const { userId } = req.body
+
+    try {
+      const [income] = await Income.getLimitedIncome(userId)
+
+      res.json(income)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
 }
 
 export default IncomeController

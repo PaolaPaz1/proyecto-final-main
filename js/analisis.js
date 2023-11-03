@@ -1,5 +1,5 @@
 import { getIncome, getExpenses } from './utils'
-getIncome('tabla1')
+getIncome('tabla1', true)
 getExpenses('tabla2', true)
 
 const body = document.querySelector('body')

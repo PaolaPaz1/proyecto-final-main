@@ -43,11 +43,21 @@ function createTable (data, divId, limited = false) {
 
   if (limited) {
     const limitedRow = document.createElement('tr')
+    const trMore = document.createElement('tr')
+
+    const tdMore = document.createElement('td')
+    tdMore.setAttribute('colspan', Object.keys(data[0]).length)
+    tdMore.textContent = '...'
+    tdMore.style.textAlign = 'center'
+    trMore.appendChild(tdMore)
+
     const td = document.createElement('td')
     td.setAttribute('colspan', Object.keys(data[0]).length)
-    td.textContent = `Mostrando solo ${data.length} resultados de mayor cantidad`
+    td.textContent = `Mostrando solo ${data.length} resultado${data.length > 1 ? 's' : ''} de mayor cantidad`
     td.style.textAlign = 'center'
     limitedRow.appendChild(td)
+
+    table.appendChild(trMore)
     table.appendChild(limitedRow)
   }
 
@@ -57,7 +67,7 @@ function createTable (data, divId, limited = false) {
   targetDiv.appendChild(table)
 }
 
-export function getIncome (divId) {
+export function getIncome (divId, limited = false) {
   fetch('http://localhost:3000/incomes/get-incomes', {
     method: 'POST',
     headers: {
@@ -67,7 +77,7 @@ export function getIncome (divId) {
   })
     .then(response => response.json())
     .then(data => {
-      createTable(data, divId)
+      createTable(data, divId, limited)
     })
     .catch(err => console.error(err))
 }

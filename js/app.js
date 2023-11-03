@@ -1,6 +1,8 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault()
 
+  const errorMessage = document.getElementById('errorMessage')
+
   const email = document.getElementById('email').value.trim()
   const password = document.getElementById('password').value.trim()
 
@@ -19,6 +21,13 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
       .then(response => response.json())
       .then(data => {
+        if (!data.userId) {
+          errorMessage.innerHTML = 'Credenciales incorrectas'
+          setInterval(() => {
+            errorMessage.innerHTML = ''
+          }, 2000)
+          return
+        }
         localStorage.setItem('userId', data.userId)
         window.location.href = './dashboard.html'
       })

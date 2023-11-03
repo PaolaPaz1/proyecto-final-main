@@ -23,6 +23,22 @@ class Income {
 
     return income
   }
+
+  static async getLimitedIncome (userId) {
+    const income = await db.execute(
+      `SELECT
+        monto,
+        categoria,
+        descripcion,
+        fecha
+      FROM income
+      WHERE id_usuario = ?
+      ORDER BY monto DESC
+      LIMIT 5`, [userId]
+    )
+
+    return income
+  }
 }
 
 export default Income
