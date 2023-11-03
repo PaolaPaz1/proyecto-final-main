@@ -39,6 +39,17 @@ class Expense {
 
     return expenses
   }
+
+  static async getTotalExpenses (userId) {
+    const expenses = await db.execute(
+      `SELECT
+        SUM(monto) AS total
+      FROM expenses
+      WHERE id_usuario = ?`, [userId]
+    )
+
+    return expenses
+  }
 }
 
 export default Expense

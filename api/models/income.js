@@ -39,6 +39,17 @@ class Income {
 
     return income
   }
+
+  static async getTotalIncome (userId) {
+    const income = await db.execute(
+      `SELECT
+        SUM(monto) AS total
+      FROM income
+      WHERE id_usuario = ?`, [userId]
+    )
+
+    return income
+  }
 }
 
 export default Income

@@ -38,6 +38,19 @@ class ExpenseController {
       res.status(500).json({ error: err.message })
     }
   }
+
+  async getTotalExpenses (req, res) {
+    const { userId } = req.body
+
+    try {
+      const [expenses] = await Expense.getTotalExpenses(userId)
+
+      res.json(expenses)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
 }
 
 export default ExpenseController

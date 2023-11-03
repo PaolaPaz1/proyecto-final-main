@@ -9,5 +9,6 @@ const expenseController = new ExpenseController()
 routerExpense.post('/new-expense', cors(corsOptions), expenseController.newExpense)
 routerExpense.post('/get-expenses', cors(corsOptions), expenseController.getExpenses)
 routerExpense.post('/get-limited-expenses', cors(corsOptions), expenseController.getLimitedExpenses)
+routerExpense.post('/get-total-expenses', cors(corsOptions), expenseController.getTotalExpenses)
 
 export default routerExpense
