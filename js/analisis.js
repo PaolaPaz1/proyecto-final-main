@@ -75,7 +75,7 @@ const calcularTotal = () => {
     p.innerHTML += `Saldo: $${totalIncomes - totalExpenses}`
   } else if (totalIncomes < totalExpenses) {
     p.style.color = 'red'
-    p.innerHTML += `Saldo: -$${Math.abs(totalExpenses - totalIncomes)}`
+    p.innerHTML += `Saldo: -$${parseFloat(Math.abs(totalExpenses - totalIncomes)).toFixed(2)}`
   }
 
   resumen.appendChild(p)
