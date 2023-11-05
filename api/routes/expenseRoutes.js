@@ -10,5 +10,6 @@ routerExpense.post('/new-expense', cors(corsOptions), expenseController.newExpen
 routerExpense.post('/get-expenses', cors(corsOptions), expenseController.getExpenses)
 routerExpense.post('/get-limited-expenses', cors(corsOptions), expenseController.getLimitedExpenses)
 routerExpense.post('/get-total-expenses', cors(corsOptions), expenseController.getTotalExpenses)
+routerExpense.post('/get-expenses-by-category', cors(corsOptions), expenseController.getExpensesByCategory)
 
 export default routerExpense

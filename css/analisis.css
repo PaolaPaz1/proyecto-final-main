@@ -9,7 +9,7 @@ main {
   text-align: center;
 }
 
-h1 {
+h1, h2 {
   margin-bottom: 10px;
 }
 
@@ -41,4 +41,12 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Alinea la tabla al inicio (parte superior) del contenedor div */
+}
+
+canvas {
+  width: 100%;
+  min-width: 350px;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
 }

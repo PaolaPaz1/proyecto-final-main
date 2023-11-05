@@ -50,6 +50,19 @@ class Income {
 
     return income
   }
+
+  static async getIncomeByCategory (userId) {
+    const income = await db.execute(
+      `SELECT
+        categoria,
+        SUM(monto) AS total
+      FROM income
+      WHERE id_usuario = ?
+      GROUP BY categoria`, [userId]
+    )
+
+    return income
+  }
 }
 
 export default Income

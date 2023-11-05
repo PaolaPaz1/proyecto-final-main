@@ -15,6 +15,7 @@
 			if (!userId) window.location.href = "../index.html";
 		</script>
 		<script src="../js/analisis.js" type="module" defer></script>
+		<script src="../js/utils-graphic.js" type="module" defer></script>
 		<title>MoneyMinder | Analisis</title>
 	</head>
 	<body>
@@ -119,6 +120,14 @@
 				<section id="tabla2"></section>
 			</div>
 			<div class="resumen"></div>
+			<div>
+				<h2>Ingresos</h2>
+				<canvas id="myChart-inc"></canvas>
+			</div>
+			<div>
+				<h2>Egresos</h2>
+				<canvas id="myChart-exp"></canvas>
+			</div>
 			<div class="recomendaciones">jeje</div>
 		</main>
 	</body>

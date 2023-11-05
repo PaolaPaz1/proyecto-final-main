@@ -51,6 +51,19 @@ class ExpenseController {
       res.status(500).json({ error: err.message })
     }
   }
+
+  async getExpensesByCategory (req, res) {
+    const { userId } = req.body
+
+    try {
+      const [expenses] = await Expense.getExpensesByCategory(userId)
+
+      res.json(expenses)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
 }
 
 export default ExpenseController
