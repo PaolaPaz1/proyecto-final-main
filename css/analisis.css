@@ -1,0 +1,82 @@
+/* Estilos base para tu etiqueta main y las tablas */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Espacio entre las tablas y el resumen de datos */
+  align-items: flex-start;
+  margin: 15px 0;
+}
+
+/* Estilos para las tablas */
+table {
+  width: 100%; /* O un ancho específico si así lo deseas */
+  max-width: 600px;
+  margin: 0 auto; /* Esto evita que las tablas sean demasiado anchas en pantallas grandes */
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el resumen de datos */
+.resumen {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  text-align: center; /* Centra el texto dentro del div resumen */
+}
+
+/* Estilos para las recomendaciones */
+.recomendaciones {
+  width: 100%;
+  text-align: center;
+}
+
+/* Media queries para pantallas más pequeñas, como teléfonos */
+@media (max-width: 768px) { /* 768px es un punto de quiebre común para dispositivos móviles */
+  main {
+    flex-direction: column; /* Esto apila los elementos verticalmente */
+  }
+
+  table {
+    max-width: 100%;
+  }
+}
+
+/* Estilo para la tabla */
+
+.custom-table {
+  border-collapse: collapse;
+  width: 50%;
+}
+
+/* Estilo para los contenedores de las tablas */
+#tabla1, #tabla2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea la tabla al inicio (parte superior) del contenedor div */
+}
+
+.custom-table th, .custom-table td {
+  border: 1px solid #e1e1e1;
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 0.9em;
+}
+
+.custom-table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.custom-table tr:nth-child(odd) {
+  background-color: white;
+}
+
+.custom-table tr:hover {
+  background-color: #f1f1f1;
+}
