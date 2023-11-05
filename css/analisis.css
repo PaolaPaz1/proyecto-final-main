@@ -9,7 +9,7 @@ main {
   text-align: center;
 }
 
-h1, h2 {
+h1 {
   margin-bottom: 10px;
 }
 
@@ -34,10 +34,14 @@ h1, h2 {
   table {
     max-width: 100%;
   }
+
+  canvas {
+    max-width: 100%;
+  }
 }
 
 /* Estilo para los contenedores de las tablas */
-#tabla1, #tabla2 {
+#tabla1, #tabla2, #canva1, #canva2 {
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Alinea la tabla al inicio (parte superior) del contenedor div */
@@ -47,6 +51,5 @@ canvas {
   width: 100%;
   min-width: 350px;
   max-width: 600px;
-  height: auto;
   margin: 0 auto;
 }
