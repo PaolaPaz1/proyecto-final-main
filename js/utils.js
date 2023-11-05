@@ -68,7 +68,9 @@ function createTable (data, divId, limited = false) {
 }
 
 export function getIncome (divId, limited = false) {
-  fetch('http://localhost:3000/incomes/get-incomes', {
+  const endpoint = limited ? 'get-limited-incomes' : 'get-incomes'
+
+  fetch(`http://localhost:3000/incomes/${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
