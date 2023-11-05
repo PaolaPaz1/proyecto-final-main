@@ -6,6 +6,11 @@ main {
   gap: 20px; /* Espacio entre las tablas y el resumen de datos */
   align-items: flex-start;
   margin: 15px 0;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 10px;
 }
 
 /* Estilos para el resumen de datos */
