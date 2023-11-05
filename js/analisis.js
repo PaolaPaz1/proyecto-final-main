@@ -36,6 +36,7 @@ fetch('http://localhost:3000/expenses/get-total-expenses', {
   .then(res => res.json())
   .then(data => {
     totalExpenses = parseFloat(data[0].total)
+    if (!totalExpenses) return
     const p = document.createElement('p')
     p.innerHTML = `Total de gastos: $${totalExpenses}`
     resumen.appendChild(p)
@@ -51,6 +52,7 @@ fetch('http://localhost:3000/incomes/get-total-incomes', {
   .then(res => res.json())
   .then(data => {
     totalIncomes = parseFloat(data[0].total)
+    if (!totalIncomes) return
     const p = document.createElement('p')
     p.innerHTML += `Total de ingresos: $${totalIncomes}`
     resumen.appendChild(p)
@@ -59,6 +61,12 @@ fetch('http://localhost:3000/incomes/get-total-incomes', {
 
 const calcularTotal = () => {
   const p = document.createElement('p')
+
+  if (totalIncomes === totalExpenses) {
+    p.style.color = 'blue'
+    p.innerHTML += 'Saldo: $0'
+    return
+  }
 
   if (totalIncomes > totalExpenses) {
     p.style.color = 'green'

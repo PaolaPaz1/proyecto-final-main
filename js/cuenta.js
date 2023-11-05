@@ -1,5 +1,6 @@
 const accountData = {}
 const userId = localStorage.getItem('userId')
+const p = document.getElementById('message')
 
 const getUser = async () => {
   await fetch(`http://localhost:3000/users/user?id=${userId}`, {
@@ -14,6 +15,7 @@ const getUser = async () => {
         accountData.name = data.name
         accountData.lastname = data.lastname
         accountData.email = data.email
+        accountData.password = data.password
       })
 
       showAccountInfo()
@@ -32,10 +34,10 @@ function showAccountInfo () {
       <p><strong>Correo electrónico:</strong> ${accountData.email}</p>
       <button id="button">Editar</button>
   `
-}
 
-const button = document.getElementById('button')
-button.addEventListener('click', editAccount)
+  const button = document.getElementById('button')
+  button.addEventListener('click', editAccount)
+}
 
 // Función para mostrar el formulario de edición
 function editAccount () {
@@ -46,26 +48,49 @@ function editAccount () {
   editFormSection.style.display = 'block'
 
   // Llenar el formulario con los datos actuales
-  document.getElementById('username').value = accountData.username
+  document.getElementById('name').value = accountData.name
+  document.getElementById('lastname').value = accountData.lastname
   document.getElementById('email').value = accountData.email
+  document.getElementById('password').value = accountData.password
 }
 
 // Función para manejar la edición y guardar cambios
-document.getElementById('edit-form').addEventListener('submit', function (event) {
+document.getElementById('edit-form').addEventListener('submit', async (event) => {
   event.preventDefault()
 
   // Obtener los nuevos datos del formulario
-  const newUsername = document.getElementById('username').value
+  const newName = document.getElementById('name').value
+  const newLastname = document.getElementById('lastname').value
   const newEmail = document.getElementById('email').value
+  const newPassword = document.getElementById('password').value
 
   // Actualizar los datos de la cuenta
-  accountData.username = newUsername
-  accountData.email = newEmail
+  accountData.name = newName.trim()
+  accountData.lastname = newLastname.trim()
+  accountData.email = newEmail.trim()
+  accountData.password = newPassword.trim()
 
-  // Volver a mostrar la información de la cuenta
-  showAccountInfo()
-
-  // Ocultar el formulario de edición
-  document.getElementById('account-info').style.display = 'block'
-  document.getElementById('edit-form').style.display = 'none'
+  await fetch(`http://localhost:3000/users/patch?id=${userId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: newName,
+      lastname: newLastname,
+      email: newEmail,
+      password: newPassword
+    })
+  })
+    .then(response => response.json())
+    .then(data => {
+      p.innerHTML = data.message
+      setInterval(() => {
+        getUser()
+        showAccountInfo()
+        // Ocultar el formulario de edición
+        document.getElementById('account-info').style.display = 'block'
+        document.getElementById('edit-form').style.display = 'none'
+      }, 3000)
+    })
 })

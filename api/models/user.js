@@ -6,7 +6,8 @@ class User {
       `SELECT 
         name,
         lastname,
-        email
+        email,
+        password
       FROM users
       WHERE id = ?`, [id]
     )
@@ -44,6 +45,18 @@ class User {
         email,
         password
       ) VALUES (?, ?, ?, ?)`, [name, lastname, email, password]
+    )
+  }
+
+  static async update (id, name, lastname, email, password) {
+    await db.execute(
+      `UPDATE users
+      SET
+        name = ?,
+        lastname = ?,
+        email = ?,
+        password = ?
+      WHERE id = ?`, [name, lastname, email, password, id]
     )
   }
 }

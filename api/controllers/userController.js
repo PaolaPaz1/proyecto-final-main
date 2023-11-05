@@ -43,6 +43,20 @@ class UserController {
       res.status(500).json({ error: err.message })
     }
   }
+
+  async patchUser (req, res) {
+    const { id } = req.query
+    const { name, lastname, email, password } = req.body
+    if (!id || !name || !lastname || !email || !password) throw new Error('All fields required')
+
+    try {
+      await User.update(id, name, lastname, email, password)
+      res.json({ message: 'User updated' })
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
 }
 
 export default UserController
