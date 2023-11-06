@@ -18,7 +18,8 @@ class Income {
         descripcion,
         fecha
       FROM income
-      WHERE id_usuario = ?`, [userId]
+      WHERE id_usuario = ?
+      ORDER BY id_ingreso DESC`, [userId]
     )
 
     return income

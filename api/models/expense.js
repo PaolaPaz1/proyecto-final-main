@@ -18,7 +18,8 @@ class Expense {
         descripcion,
         fecha
       FROM expenses
-      WHERE id_usuario = ?`, [userId]
+      WHERE id_usuario = ?
+      ORDER BY id_egreso DESC`, [userId]
     )
 
     return expenses
