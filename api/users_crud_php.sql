@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2023 at 07:05 PM
+-- Generation Time: Nov 07, 2023 at 01:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -61,7 +61,7 @@ CREATE TABLE `expenses` (
   `monto` decimal(10,2) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `categoria` varchar(255) DEFAULT NULL,
-  `fecha` datetime NOT NULL
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -76,7 +76,7 @@ CREATE TABLE `income` (
   `monto` decimal(10,2) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `categoria` varchar(255) DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -99,17 +99,21 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `password`, `email`) VALUES
 (6, 'Lionel Andrés', 'Messi Cuccittini', 'goat', 'messi10@goat.com'),
-(8, 'Fatima', 'Caballero', 'manchita', 'fcaballero03@gmail.com'),
+(8, 'Fatima Margarita', 'Caballero Rivera', 'manchita', 'fcaballero03@gmail.com'),
 (9, 'Johana', 'Landaverde', 'pepito12', 'johalanda73@hotmail.com'),
 (10, 'Paola', 'Guevara', 'pepito', 'pao182930@hotmail.com'),
 (11, 'Jacob', 'Herrera', 'aaaaa', 'jacob112@clases.edu.sv'),
 (12, 'Pancho', 'Wenceslao', 'panchito123', 'panchito123@hotmail.com'),
-(13, 'Pedri \"Potter\"', 'Gonzales', 'nosequeponer', 'pedri16@fcb.com'),
+(13, 'Pedri \"Potter\"', 'Gonzales', '12345', 'pedri16@fcb.com'),
 (16, 'Mami', 'Mamá', 'mamita', 'mamassv@mom.com'),
 (17, 'Jhon', 'Smith', '1234', 'john.smith@example.com'),
 (24, 'Ingrid', 'Herrera', 'nose123', 'nosejaja@hotmail.com'),
 (25, 'Rosendo', 'Garcia', 'whenyourallarg', 'mardybum@upupandway.com'),
-(26, 'Rosendo', 'Garcia', 'dsadsadsad', 'jajajajj.jaja@shewasclose.com');
+(26, 'Rosendo', 'Garcia', 'dsadsadsad', 'jajajajj.jaja@shewasclose.com'),
+(27, 'Saira', 'Benitez', '12345', 'saildrey@nose.com'),
+(28, 'patito juan', 'alcachofas', '12345', 'prueba@gmail.com'),
+(29, 'Jefferson', 'Pineda', '12345', 'pruebas2.12@gmail.com'),
+(30, 'Juan', 'Ejemplo', '8520', 'ojalasirva@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -157,19 +161,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id_egreso` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_egreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-  MODIFY `id_ingreso` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
