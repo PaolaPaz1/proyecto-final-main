@@ -6,19 +6,61 @@ document.addEventListener('DOMContentLoaded', function () {
   limiteForm.addEventListener('submit', function (event) {
     event.preventDefault()
 
-    const limiteMensual = parseFloat(document.getElementById('limiteMensual').value)
+    const limite = parseFloat(document.getElementById('limiteMensual').value)
 
-    if (isNaN(limiteMensual)) {
-      mensajeError.textContent = 'Por favor, ingrese un límite mensual válido.'
-    } else {
-      // Almacena el límite mensual en una variable global
-      window.limiteMensual = limiteMensual
-
-      mensajeError.textContent = ''
-      mensajeExito.textContent = 'Límite mensual establecido con éxito: $' + limiteMensual.toFixed(2)
-
-      // Redirige al usuario a otra página, si es necesario
-      // Ejemplo: window.location.href = "egresos.html";
-    }
+    fetch('http://localhost:3000/users/set-monthly-limit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: localStorage.getItem('userId'),
+        limit: limite,
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message) {
+          mensajeExito.innerHTML = data.message
+          mensajeError.innerHTML = ''
+          setTimeout(() => {
+            mensajeExito.innerHTML = ''
+            getMonthlyLimit()
+          }, 2000)
+        } else {
+          mensajeError.innerHTML = data.error
+          mensajeExito.innerHTML = ''
+          setTimeout(() => {
+            mensajeError.innerHTML = ''
+          }, 2000)
+        }
+      })
   })
 })
+
+const getMonthlyLimit = () => {
+  const p = document.getElementById('cantidadActual')
+
+  fetch('http://localhost:3000/users/get-monthly-limit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId: localStorage.getItem('userId'),
+      year: new Date().getFullYear(),
+      month: new Date().getMonth() + 1
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data) {
+        p.innerHTML = `Tu límite mensual es de $${data.limite}`
+      }
+    })
+    .catch(err => console.error(err))
+}
+
+getMonthlyLimit()

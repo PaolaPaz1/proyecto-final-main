@@ -66,7 +66,7 @@ class User {
         (id_usuario, año, mes, limite)
       VALUES
         (?, ?, ?, ?)
-      ON DUPLICATE KEY UPDATE limite = ?`, [userId, year, month, limit, limit]
+      ON DUPLICATE KEY UPDATE limite = VALUES(limite)`, [userId, year, month, limit]
     )
   }
 
