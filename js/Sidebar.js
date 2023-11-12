@@ -15,7 +15,8 @@ export const Sidebar = () => {
   <div class="menu-bar">
     <div class="menu">
       <ul class="menu-links">
-        <li class="nav-link"><a href="cuenta.html"><i class="bx bx-home-alt icon"></i><span class="text nav-text">Mi Cuenta</span></a></li>
+        <li class="nav-link"><a href="dashboard.html"><i class="bx bx-home icon"></i><span class="text nav-text">Inicio</span></a></li>
+        <li class="nav-link"><a href="cuenta.html"><i class="bx bx-cog icon"></i><span class="text nav-text">Mi Cuenta</span></a></li>
         <li class="nav-link"><a href="ingresos.html"><i class="bx bx-bar-chart-alt-2 icon"></i><span class="text nav-text">Ingresos</span></a></li>
         <li class="nav-link"><a href="gastos.html"><i class="bx bx-wallet icon"></i><span class="text nav-text">Egresos</span></a></li>
         <li class="nav-link"><a href="analisis.html"><i class="bx bx-pie-chart-alt icon"></i><span class="text nav-text">Análisis</span></a></li>

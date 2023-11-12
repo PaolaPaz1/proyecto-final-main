@@ -1,5 +1,4 @@
 import { getIncome, getExpenses } from './utils'
-import { createGraphic } from './utils-graphic'
 
 getIncome('tabla1', true)
 getExpenses('tabla2', true)
@@ -54,7 +53,7 @@ const calcularTotal = () => {
 
   if (totalIncomes > totalExpenses) {
     p.style.color = 'green'
-    p.innerHTML += `Saldo: $${totalIncomes - totalExpenses}`
+    p.innerHTML += `Saldo: $${parseFloat(Math.abs(totalIncomes - totalExpenses)).toFixed(2)}`
   } else if (totalIncomes < totalExpenses) {
     p.style.color = 'red'
     p.innerHTML += `Saldo: -$${parseFloat(Math.abs(totalExpenses - totalIncomes)).toFixed(2)}`
@@ -62,37 +61,3 @@ const calcularTotal = () => {
 
   resumen.appendChild(p)
 }
-
-fetch('http://localhost:3000/incomes/get-incomes-by-category', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ userId: localStorage.getItem('userId') })
-})
-  .then(res => res.json())
-  .then(data => {
-    const categorias = data.map(item => item.categoria)
-    const cantidades = data.map(item => parseFloat(item.total))
-
-    const ctx = document.getElementById('myChart-inc').getContext('2d')
-
-    createGraphic(ctx, categorias, cantidades, 'Ingresado')
-  })
-
-fetch('http://localhost:3000/expenses/get-expenses-by-category', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ userId: localStorage.getItem('userId') })
-})
-  .then(res => res.json())
-  .then(data => {
-    const categorias = data.map(item => item.categoria)
-    const cantidades = data.map(item => parseFloat(item.total))
-
-    const ctx = document.getElementById('myChart-exp').getContext('2d')
-
-    createGraphic(ctx, categorias, cantidades, 'Egresado')
-  })

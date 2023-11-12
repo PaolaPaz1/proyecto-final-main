@@ -4,6 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="../css/dashboard.css" />
+		<link rel="stylesheet" href="../css/analisis.css">
 		<link
 			href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
 			rel="stylesheet"
@@ -12,6 +13,7 @@
 			const userId = localStorage.getItem("userId");
 			if (!userId) window.location.href = "../index.html";
 		</script>
+		<script src="../js/dashboard.js" type="module" defer></script>
 		<title>MoneyMinder | Inicio</title>
 	</head>
 	<body>
@@ -23,21 +25,20 @@
 			document.body.appendChild(sidebarElement);
 			initSidebarEvents(sidebarElement);
 		</script>
-		<section class="home">
-			<div class="text">Barra lateral del tablero</div>
-		</section>
-
-		<script src="../js/dashboard.js" type="module"></script>
-
-		<script>
-			// Función para cerrar sesión
-			function logout() {
-				// Puedes agregar aquí la lógica para limpiar la información de sesión,
-				// redirigir a la página de inicio de sesión, etc.
-				alert("¡Has cerrado sesión exitosamente!");
-				// En este ejemplo, simplemente recargamos la página para simular el cierre de sesión.
-				location.reload();
-			}
-		</script>
+		<main id="myId">
+			<div>
+				<h1>Ingresos</h1>
+				<section id="canva1">
+					<canvas id="myChart-inc"></canvas>
+				</section>
+			</div>
+			<div>
+				<h1>Egresos</h1>
+				<section id="canva2">
+					<canvas id="myChart-exp"></canvas>
+				</section>
+			</div>
+			<div class="resumen"></div>
+		</main>
 	</body>
 </html>
