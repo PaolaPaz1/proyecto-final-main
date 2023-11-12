@@ -64,6 +64,19 @@ class ExpenseController {
       res.status(500).json({ error: err.message })
     }
   }
+
+  async checkMonthlyLimitExp (req, res) {
+    const { userId, year, month } = req.body
+
+    try {
+      const [expenses] = await Expense.checkMonthlyLimitExp(userId, year, month)
+
+      res.json(expenses)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
 }
 
 export default ExpenseController

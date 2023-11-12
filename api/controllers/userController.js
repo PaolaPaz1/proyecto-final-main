@@ -57,6 +57,32 @@ class UserController {
       res.status(500).json({ error: err.message })
     }
   }
+
+  async setMonthlyLimit (req, res) {
+    const { userId, limit, year, month } = req.body
+    if (!userId || !limit || !year || !month) throw new Error('All fields required')
+
+    try {
+      await User.setMonthlyLimit(userId, limit, year, month)
+      res.json({ message: 'Monthly limit set' })
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
+
+  async getMonthlyLimit (req, res) {
+    const { userId, year, month } = req.body
+    if (!userId || !year || !month) throw new Error('All fields required')
+
+    try {
+      const [limit] = await User.getMonthlyLimit(userId, year, month)
+      res.json(limit)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: err.message })
+    }
+  }
 }
 
 export default UserController
