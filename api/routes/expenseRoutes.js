@@ -11,5 +11,6 @@ routerExpense.post('/get-expenses', cors(corsOptions), expenseController.getExpe
 routerExpense.post('/get-limited-expenses', cors(corsOptions), expenseController.getLimitedExpenses)
 routerExpense.post('/get-total-expenses', cors(corsOptions), expenseController.getTotalExpenses)
 routerExpense.post('/get-expenses-by-category', cors(corsOptions), expenseController.getExpensesByCategory)
+routerExpense.post('/check-monthly-limit', cors(corsOptions), expenseController.checkMonthlyLimitExp)
 
 export default routerExpense
