@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,7 +5,7 @@ body {
     background-color: #f4f4f4;
 }
 
-header {
+.mcHeader {
     background-color: #333;
     color: white;
     padding: 1em;

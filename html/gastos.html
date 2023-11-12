@@ -5,7 +5,7 @@
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="../css/gastos.css" />
 		<link rel="stylesheet" href="../css/dashboard.css" />
-		<link rel="stylesheet" href="../css/estilos-tabla.css">
+		<link rel="stylesheet" href="../css/estilos-tabla.css" />
 		<link
 			href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
 			rel="stylesheet"
@@ -17,99 +17,21 @@
 		<script src="../js/gastos.js" type="module" defer></script>
 	</head>
 	<body>
-		<nav class="sidebar close">
-			<header>
-				<div class="image-text">
-					<span class="image">
-						<img src="../images/cerdo.png" alt="" />
-					</span>
-				</div>
+		<script src="../js/Sidebar.js" type="module"></script>
+		<script type="module">
+			import { Sidebar, initSidebarEvents } from "../js/Sidebar.js";
 
-				<i class="bx bx-chevron-right toggle"></i>
-			</header>
-
-			<div class="menu-bar">
-				<div class="menu">
-					
-					<ul class="menu-links">
-						<li class="nav-link">
-							<a href="cuenta.html">
-								<i class="bx bx-home-alt icon"></i>
-								<span class="text nav-text">Mi Cuenta</span>
-							</a>
-						</li>
-
-
-						<li class="nav-link">
-							<a href="ingresos.html">
-								<i class="bx bx-bar-chart-alt-2 icon"></i>
-								<span class="text nav-text">Ingresos</span>
-							</a>
-						</li>
-
-						<li class="nav-link">
-							<a href="gastos.html">
-								<i class="bx bx-wallet icon"></i>
-								<span class="text nav-text">Egresos</span>
-							</a>
-						</li>
-
-						<li class="nav-link">
-							<a href="analisis.html">
-								<i class="bx bx-pie-chart-alt icon"></i>
-								<span class="text nav-text">Análisis</span>
-							</a>
-						</li>
-
-						<li class="nav-link">
-							<a href="recomendaciones.html">
-								<i class="bx bx-heart icon"></i>
-								<span class="text nav-text">Limite Mensual</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="bottom-content">
-					<li class="">
-						<a href="#" id="cerrarSesion">
-							<i class="bx bx-log-out icon"></i>
-							<span class="text nav-text">Cerrar Sesión</span>
-						</a>
-
-						<script>
-							document
-								.getElementById("cerrarSesion")
-								.addEventListener("click", function () {
-									// Realiza las acciones de cierre de sesión aquí
-									// Redirige al usuario a la página de inicio de sesión
-									localStorage.removeItem("userId");
-									window.location.href = "../index.html";
-								});
-						</script>
-					</li>
-
-					<li class="mode">
-						<div class="sun-moon">
-							<i class="bx bx-moon icon moon"></i>
-							<i class="bx bx-sun icon sun"></i>
-						</div>
-						<span class="mode-text text">Modo oscuro</span>
-
-						<div class="toggle-switch">
-							<span class="switch"></span>
-						</div>
-					</li>
-				</div>
-			</div>
-		</nav>
-		<br>
+			const sidebarElement = Sidebar();
+			document.body.appendChild(sidebarElement);
+			initSidebarEvents(sidebarElement);
+		</script>
+		<br />
 		<form id="egresoForm">
-			<br>
+			<br />
 			<h1>REGISTRO DE EGRESOS</h1>
-			<br>
+			<br />
 			<label for="fecha">Fecha del Monto</label>
-			<input type="date" id="fecha" name="fecha" required>
+			<input type="date" id="fecha" name="fecha" required />
 
 			<label for="monto">Monto del Egreso:</label>
 			<input type="number" id="monto" name="monto" step="any" required />

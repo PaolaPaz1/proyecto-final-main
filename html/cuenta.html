@@ -1,135 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/micuenta.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/micuenta.css" />
+		<link rel="stylesheet" href="../css/dashboard.css" />
+		<link
 			href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
-			rel="stylesheet"/>
-    <script>
-        const userIdTest = localStorage.getItem("userId");
-        if (!userIdTest) window.location.href = "../index.html";
-    </script>
-    <script src="../js/cuenta.js" type="module" defer></script>
-    <title>Mi Cuenta</title>
-    
-</head>
-<body>
-    <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="../images/cerdo.png" alt="" />
-                </span>
-            </div>
+			rel="stylesheet"
+		/>
+		<script>
+			const userIdTest = localStorage.getItem("userId");
+			if (!userIdTest) window.location.href = "../index.html";
+		</script>
+		<script src="../js/cuenta.js" type="module" defer></script>
+		<title>Mi Cuenta</title>
+	</head>
+	<body>
+		<script src="../js/Sidebar.js" type="module"></script>
+		<script type="module">
+			import { Sidebar, initSidebarEvents } from "../js/Sidebar.js";
 
-            <i class="bx bx-chevron-right toggle"></i>
-        </header>
+			const sidebarElement = Sidebar();
+			document.body.appendChild(sidebarElement);
+			initSidebarEvents(sidebarElement);
+		</script>
 
-        <div class="menu-bar">
-            <div class="menu">
-                
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="cuenta.html">
-                            <i class="bx bx-home-alt icon"></i>
-                            <span class="text nav-text">Mi Cuenta</span>
-                        </a>
-                    </li>
+		<header class="mcHeader">
+			<h1>Mi Cuenta</h1>
+		</header>
 
+		<section id="account-info">
+			<!-- Aquí se mostrarán los datos de la cuenta -->
+		</section>
 
-                    <li class="nav-link">
-                        <a href="ingresos.html">
-                            <i class="bx bx-bar-chart-alt-2 icon"></i>
-                            <span class="text nav-text">Ingresos</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="gastos.html">
-                            <i class="bx bx-wallet icon"></i>
-                            <span class="text nav-text">Egresos</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="analisis.html">
-                            <i class="bx bx-pie-chart-alt icon"></i>
-                            <span class="text nav-text">Análisis</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="recomendaciones.html">
-                            <i class="bx bx-heart icon"></i>
-                            <span class="text nav-text">Limite Mensual</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#" id="cerrarSesion">
-                        <i class="bx bx-log-out icon"></i>
-                        <span class="text nav-text">Cerrar Sesión</span>
-                    </a>
-
-                    <script>
-                        document
-                            .getElementById("cerrarSesion")
-                            .addEventListener("click", function () {
-                                // Realiza las acciones de cierre de sesión aquí
-                                // Redirige al usuario a la página de inicio de sesión
-                                localStorage.removeItem("userId");
-                                window.location.href = "../index.html";
-                            });
-                    </script>
-                </li>
-
-                <li class="mode">
-                    <div class="sun-moon">
-                        <i class="bx bx-moon icon moon"></i>
-                        <i class="bx bx-sun icon sun"></i>
-                    </div>
-                    <span class="mode-text text">Modo oscuro</span>
-
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li>
-            </div>
-        </div>
-    </nav>
-
-    <header>
-        <h1>Mi Cuenta</h1>
-    </header>
-
-    <section id="account-info">
-        <!-- Aquí se mostrarán los datos de la cuenta -->
-    </section>
-
-    <section id="edit-form" style="display: none;">
-        <h2>Editar Información</h2>
-        <form id="edit-form">
-            <label for="username">Nombre:</label>
-            <input type="text" id="name" name="username" required>
-            <br><br>
-            <label for="username">Apellido:</label>
-            <input type="text" id="lastname" name="name" required>
-            <br><br>
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" name="email" required>
-            <br><br>
-            <label for="password">Contraseña:</label>
-            <input type="text" id="password" name="password" required>
-            <br><br>
-            <button type="submit">Guardar Cambios</button>
-            <p id="message"></p>
-        </form>
-    </section>
-</body>
+		<section id="edit-form" style="display: none">
+			<h2>Editar Información</h2>
+			<form id="edit-form">
+				<label for="username">Nombre:</label>
+				<input type="text" id="name" name="username" required />
+				<br /><br />
+				<label for="username">Apellido:</label>
+				<input type="text" id="lastname" name="name" required />
+				<br /><br />
+				<label for="email">Correo electrónico:</label>
+				<input type="email" id="email" name="email" required />
+				<br /><br />
+				<label for="password">Contraseña:</label>
+				<input type="text" id="password" name="password" required />
+				<br /><br />
+				<button type="submit">Guardar Cambios</button>
+				<p id="message"></p>
+			</form>
+		</section>
+	</body>
 </html>

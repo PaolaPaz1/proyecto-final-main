@@ -5,28 +5,10 @@ getIncome('tabla1', true)
 getExpenses('tabla2', true)
 
 const body = document.querySelector('body')
-const sidebar = body.querySelector('nav')
-const toggle = body.querySelector('.toggle')
-const modeSwitch = body.querySelector('.toggle-switch')
-const modeText = body.querySelector('.mode-text')
 const resumen = body.querySelector('.resumen')
 
 let totalExpenses = 0
 let totalIncomes = 0
-
-toggle.addEventListener('click', () => {
-  sidebar.classList.toggle('close')
-})
-
-modeSwitch.addEventListener('click', () => {
-  body.classList.toggle('dark')
-
-  if (body.classList.contains('dark')) {
-    modeText.innerText = 'Light mode'
-  } else {
-    modeText.innerText = 'Dark mode'
-  }
-})
 
 fetch('http://localhost:3000/expenses/get-total-expenses', {
   method: 'POST',
