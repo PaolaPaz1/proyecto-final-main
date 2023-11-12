@@ -59,6 +59,27 @@ class User {
       WHERE id = ?`, [name, lastname, email, password, id]
     )
   }
+
+  static async setMonthlyLimit (userId, limit, year, month) {
+    await db.execute(
+      `INSERT INTO limite_mensual
+        (id_usuario, año, mes, limite)
+      VALUES
+        (?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE limite = ?`, [userId, year, month, limit, limit]
+    )
+  }
+
+  static async getMonthlyLimit (userId, year, month) {
+    const [limit] = await db.execute(
+      `SELECT
+        limite
+      FROM limite_mensual
+      WHERE id_usuario = ? AND año = ? AND mes = ?`, [userId, year, month]
+    )
+
+    return limit
+  }
 }
 
 export default User

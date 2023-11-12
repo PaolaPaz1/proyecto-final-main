@@ -64,6 +64,28 @@ class Expense {
 
     return expenses
   }
+
+  static async checkMonthlyLimitExp (userId, year, month) {
+    const [expenses] = await db.execute(
+      `SELECT
+        SUM(monto) AS total
+      FROM expenses
+      WHERE id_usuario = ? AND YEAR(fecha) = ? AND MONTH(fecha) = ?`, [userId, year, month]
+    )
+
+    const [limit] = await db.execute(
+      `SELECT
+        limite
+      FROM limite_mensual
+      WHERE id_usuario = ? AND año = ? AND mes = ?`, [userId, year, month]
+    )
+
+    if (!limit[0].limite) return false
+
+    if (expenses[0].total > limit[0].limite) return true
+
+    return false
+  }
 }
 
 export default Expense
