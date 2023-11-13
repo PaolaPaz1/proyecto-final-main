@@ -60,14 +60,14 @@ const newExpense = async (data) => {
     .then(response => response.json())
     .then(data => {
       mensajeExito.innerHTML = data.message
-      setInterval(() => {
+      setTimeout(() => {
         mensajeExito.innerHTML = ''
       }, 2000)
       getExpenses('myId')
     })
     .catch(err => {
       mensajeError.innerHTML = err.message
-      setInterval(() => {
+      setTimeout(() => {
         mensajeError.innerHTML = ''
       }, 2000)
     })

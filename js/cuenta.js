@@ -85,7 +85,7 @@ document.getElementById('edit-form').addEventListener('submit', async (event) =>
     .then(response => response.json())
     .then(data => {
       p.innerHTML = data.message
-      setInterval(() => {
+      setTimeout(() => {
         getUser()
         showAccountInfo()
         // Ocultar el formulario de edición

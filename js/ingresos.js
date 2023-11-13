@@ -31,14 +31,14 @@ document.getElementById('ingresoForm').addEventListener('submit', async (e) => {
     .then(response => response.json())
     .then(data => {
       mensajeExito.innerHTML = data.message
-      setInterval(() => {
+      setTimeout(() => {
         mensajeExito.innerHTML = ''
       }, 2000)
       getIncome('myId')
     })
     .catch(err => {
       mensajeError.innerHTML = err.message
-      setInterval(() => {
+      setTimeout(() => {
         mensajeError.innerHTML = ''
       }, 2000)
     })
