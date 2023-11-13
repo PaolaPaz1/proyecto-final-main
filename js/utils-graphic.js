@@ -1,6 +1,10 @@
 import { Chart } from 'chart.js/auto'
 
 export function createGraphic (ctx, categorias, cantidades, text) {
+  if (Chart.getChart(ctx)) {
+    Chart.getChart(ctx).destroy()
+  }
+
   const myChart = new Chart(ctx, {
     type: 'pie',
     data: {

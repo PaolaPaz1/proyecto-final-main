@@ -28,6 +28,13 @@
 		<div class="banner">
 			<img src="../images/bienvenida.jpg" alt="Imagen de bienvenida">
 		</div>
+		<div class="config-month">
+			<h1 id="month-text"></h1>
+			<section>
+				<input type="month" id="month-input">
+				<button id="change-month">Cambiar datos</button>
+			</section>
+		</div>
 		<main id="myId">
 			<div>
 				<h1>Ingresos</h1>
@@ -41,7 +48,11 @@
 					<canvas id="myChart-exp"></canvas>
 				</section>
 			</div>
-			<div class="resumen"></div>
+			<div class="resumen">
+				<p id="income"></p>
+				<p id="expense"></p>
+				<p id="total"></p>
+			</div>
 		</main>
 	</body>
 </html>
