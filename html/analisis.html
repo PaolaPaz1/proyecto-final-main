@@ -27,6 +27,13 @@
 			document.body.appendChild(sidebarElement)
 			initSidebarEvents(sidebarElement)
 		</script>
+		<div class="config-month">
+			<h1 id="month-text">HOLA</h1>
+			<section>
+				<input type="month" id="month-input">
+				<button id="change-month">Cambiar datos</button>
+			</section>
+		</div>
 		<main id="myId">
 			<div>
 				<h1>Ingresos</h1>
@@ -36,7 +43,11 @@
 				<h1>Egresos</h1>
 				<section id="tabla2"></section>
 			</div>
-			<div class="resumen"></div>
+			<div class="resumen">
+				<p id="income"></p>
+				<p id="expense"></p>
+				<p id="total"></p>
+			</div>
 			<div class="recomendaciones">jeje</div>
 		</main>
 	</body>

@@ -67,7 +67,7 @@ function createTable (data, divId, limited = false) {
   targetDiv.appendChild(table)
 }
 
-export function getIncome (divId, limited = false) {
+export function getIncome (divId, limited = false, yearr = new Date().getFullYear(), monthh = new Date().getMonth() + 1) {
   const endpoint = limited ? 'get-limited-incomes' : 'get-incomes'
 
   fetch(`http://localhost:3000/incomes/${endpoint}`, {
@@ -75,7 +75,7 @@ export function getIncome (divId, limited = false) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ userId: localStorage.getItem('userId') })
+    body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
   })
     .then(response => response.json())
     .then(data => {
@@ -84,7 +84,7 @@ export function getIncome (divId, limited = false) {
     .catch(err => console.error(err))
 }
 
-export function getExpenses (divId, limited = false) {
+export function getExpenses (divId, limited = false, yearr = new Date().getFullYear(), monthh = new Date().getMonth() + 1) {
   const endpoint = limited ? 'get-limited-expenses' : 'get-expenses'
 
   fetch(`http://localhost:3000/expenses/${endpoint}`, {
@@ -92,7 +92,7 @@ export function getExpenses (divId, limited = false) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ userId: localStorage.getItem('userId') })
+    body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
   })
     .then(response => response.json())
     .then(data => {

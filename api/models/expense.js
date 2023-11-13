@@ -10,7 +10,7 @@ class Expense {
     )
   }
 
-  static async getExpenses (userId) {
+  static async getExpenses (userId, year, month) {
     const expenses = await db.execute(
       `SELECT
         monto,
@@ -18,14 +18,14 @@ class Expense {
         descripcion,
         fecha
       FROM expenses
-      WHERE id_usuario = ?
-      ORDER BY id_egreso DESC`, [userId]
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ?
+      ORDER BY id_egreso DESC`, [userId, year, month]
     )
 
     return expenses
   }
 
-  static async getLimitedExpenses (userId) {
+  static async getLimitedExpenses (userId, year, month) {
     const expenses = await db.execute(
       `SELECT
         monto,
@@ -33,33 +33,33 @@ class Expense {
         descripcion,
         fecha
       FROM expenses
-      WHERE id_usuario = ?
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ?
       ORDER BY monto DESC
-      LIMIT 5`, [userId]
+      LIMIT 5`, [userId, year, month]
     )
 
     return expenses
   }
 
-  static async getTotalExpenses (userId) {
+  static async getTotalExpenses (userId, year, month) {
     const expenses = await db.execute(
       `SELECT
         SUM(monto) AS total
       FROM expenses
-      WHERE id_usuario = ?`, [userId]
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ?`, [userId, year, month]
     )
 
     return expenses
   }
 
-  static async getExpensesByCategory (userId) {
+  static async getExpensesByCategory (userId, year, month) {
     const expenses = await db.execute(
       `SELECT
         categoria,
         SUM(monto) AS total
       FROM expenses
-      WHERE id_usuario = ?
-      GROUP BY categoria`, [userId]
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ?
+      GROUP BY categoria`, [userId, year, month]
     )
 
     return expenses

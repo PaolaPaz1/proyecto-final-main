@@ -14,10 +14,10 @@ class IncomeController {
   }
 
   async getIncome (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [income] = await Income.getIncome(userId)
+      const [income] = await Income.getIncome(userId, year, month)
 
       res.json(income)
     } catch (err) {
@@ -27,10 +27,10 @@ class IncomeController {
   }
 
   async getLimitedIncome (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [income] = await Income.getLimitedIncome(userId)
+      const [income] = await Income.getLimitedIncome(userId, year, month)
 
       res.json(income)
     } catch (err) {
@@ -40,10 +40,10 @@ class IncomeController {
   }
 
   async getTotalIncome (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [income] = await Income.getTotalIncome(userId)
+      const [income] = await Income.getTotalIncome(userId, year, month)
 
       res.json(income)
     } catch (err) {
@@ -53,10 +53,10 @@ class IncomeController {
   }
 
   async getIncomeByCategory (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [income] = await Income.getIncomeByCategory(userId)
+      const [income] = await Income.getIncomeByCategory(userId, year, month)
 
       res.json(income)
     } catch (err) {

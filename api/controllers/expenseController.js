@@ -14,10 +14,10 @@ class ExpenseController {
   }
 
   async getExpenses (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [expenses] = await Expense.getExpenses(userId)
+      const [expenses] = await Expense.getExpenses(userId, year, month)
 
       res.json(expenses)
     } catch (err) {
@@ -27,10 +27,10 @@ class ExpenseController {
   }
 
   async getLimitedExpenses (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [expenses] = await Expense.getLimitedExpenses(userId)
+      const [expenses] = await Expense.getLimitedExpenses(userId, year, month)
 
       res.json(expenses)
     } catch (err) {
@@ -40,10 +40,10 @@ class ExpenseController {
   }
 
   async getTotalExpenses (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [expenses] = await Expense.getTotalExpenses(userId)
+      const [expenses] = await Expense.getTotalExpenses(userId, year, month)
 
       res.json(expenses)
     } catch (err) {
@@ -53,10 +53,10 @@ class ExpenseController {
   }
 
   async getExpensesByCategory (req, res) {
-    const { userId } = req.body
+    const { userId, year, month } = req.body
 
     try {
-      const [expenses] = await Expense.getExpensesByCategory(userId)
+      const [expenses] = await Expense.getExpensesByCategory(userId, year, month)
 
       res.json(expenses)
     } catch (err) {

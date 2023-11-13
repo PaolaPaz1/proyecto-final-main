@@ -10,7 +10,7 @@ class Income {
     )
   }
 
-  static async getIncome (userId) {
+  static async getIncome (userId, year, month) {
     const income = await db.execute(
       `SELECT
         monto,
@@ -18,14 +18,14 @@ class Income {
         descripcion,
         fecha
       FROM income
-      WHERE id_usuario = ?
-      ORDER BY id_ingreso DESC`, [userId]
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ?
+      ORDER BY id_ingreso DESC`, [userId, year, month]
     )
 
     return income
   }
 
-  static async getLimitedIncome (userId) {
+  static async getLimitedIncome (userId, year, month) {
     const income = await db.execute(
       `SELECT
         monto,
@@ -33,33 +33,33 @@ class Income {
         descripcion,
         fecha
       FROM income
-      WHERE id_usuario = ?
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ?
       ORDER BY monto DESC
-      LIMIT 5`, [userId]
+      LIMIT 5`, [userId, year, month]
     )
 
     return income
   }
 
-  static async getTotalIncome (userId) {
+  static async getTotalIncome (userId, year, month) {
     const income = await db.execute(
       `SELECT
         SUM(monto) AS total
       FROM income
-      WHERE id_usuario = ?`, [userId]
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ? `, [userId, year, month]
     )
 
     return income
   }
 
-  static async getIncomeByCategory (userId) {
+  static async getIncomeByCategory (userId, year, month) {
     const income = await db.execute(
       `SELECT
         categoria,
         SUM(monto) AS total
       FROM income
-      WHERE id_usuario = ?
-      GROUP BY categoria`, [userId]
+      WHERE id_usuario = ? and YEAR(fecha) = ? and MONTH(fecha) = ?
+      GROUP BY categoria`, [userId, year, month]
     )
 
     return income

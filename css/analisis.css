@@ -53,3 +53,11 @@ canvas {
   max-width: 600px;
   margin: 0 auto;
 }
+
+.config-month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px 0;
+}
