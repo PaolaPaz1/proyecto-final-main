@@ -64,28 +64,6 @@ class Income {
 
     return income
   }
-
-  static async checkMonthlyLimitInc (userId, year, month) {
-    const [incomes] = await db.execute(
-      `SELECT
-        SUM(monto) AS total
-      FROM income
-      WHERE id_usuario = ? AND YEAR(fecha) = ? AND MONTH(fecha) = ?`, [userId, year, month]
-    )
-
-    const [limit] = await db.execute(
-      `SELECT
-        limite
-      FROM limite_mensual
-      WHERE id_usuario = ? AND año = ? AND mes = ?`, [userId, year, month]
-    )
-
-    if (!limit[0].limite) return false
-
-    if (incomes[0].total > limit[0].limite) return true
-
-    return false
-  }
 }
 
 export default Income

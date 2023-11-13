@@ -64,19 +64,6 @@ class IncomeController {
       res.status(500).json({ error: err.message })
     }
   }
-
-  async checkMonthlyLimitInc (req, res) {
-    const { userId, year, month } = req.body
-
-    try {
-      const [income] = await Income.checkMonthlyLimitInc(userId, year, month)
-
-      res.json(income)
-    } catch (err) {
-      console.error(err)
-      res.status(500).json({ error: err.message })
-    }
-  }
 }
 
 export default IncomeController
