@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2023 at 01:01 AM
+-- Generation Time: Nov 13, 2023 at 08:51 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -64,6 +64,17 @@ CREATE TABLE `expenses` (
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`id_egreso`, `id_usuario`, `monto`, `descripcion`, `categoria`, `fecha`) VALUES
+(42, 31, 0.15, 'compre aguita', 'Alimentacion', '2023-11-07'),
+(43, 31, 100.00, 'fui a la pampa', 'Alimentacion', '2023-11-06'),
+(44, 6, 10.99, 'Spotify pagado', 'Entretenimiento', '2023-11-12'),
+(45, 6, 14.99, 'Compre cositas para piel grasa', 'Cuidado Personal', '2023-11-12'),
+(46, 6, 15.00, 'picsa', 'Alimentacion', '2023-11-13');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +89,39 @@ CREATE TABLE `income` (
   `categoria` varchar(255) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `income`
+--
+
+INSERT INTO `income` (`id_ingreso`, `id_usuario`, `monto`, `descripcion`, `categoria`, `fecha`) VALUES
+(20, 31, 364.25, 'me pagaron el mes en adoc', 'Ingreso Laboral', '2023-11-07'),
+(21, 31, 5.00, 'me dio mi abuelita', 'Ingreso Familiar', '2023-11-07'),
+(22, 6, 227.33, 'Me pagaron la quincena', 'Ingreso Laboral', '2023-11-12'),
+(23, 6, 120.00, 'Inverti en una tiendita de por aqui', 'Ingreso de Inversiones', '2023-11-12'),
+(24, 6, 145.00, 'pagoooo', 'Ingreso Laboral', '2023-11-12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `limite_mensual`
+--
+
+CREATE TABLE `limite_mensual` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `año` int(11) NOT NULL,
+  `mes` int(11) NOT NULL,
+  `limite` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `limite_mensual`
+--
+
+INSERT INTO `limite_mensual` (`id`, `id_usuario`, `año`, `mes`, `limite`) VALUES
+(1, 6, 2023, 11, 124.00),
+(10, 8, 2023, 11, 784.00);
 
 -- --------------------------------------------------------
 
@@ -113,7 +157,8 @@ INSERT INTO `users` (`id`, `name`, `lastname`, `password`, `email`) VALUES
 (27, 'Saira', 'Benitez', '12345', 'saildrey@nose.com'),
 (28, 'patito juan', 'alcachofas', '12345', 'prueba@gmail.com'),
 (29, 'Jefferson', 'Pineda', '12345', 'pruebas2.12@gmail.com'),
-(30, 'Juan', 'Ejemplo', '8520', 'ojalasirva@gmail.com');
+(30, 'Juan', 'Ejemplo', '8520', 'ojalasirva@gmail.com'),
+(31, 'Panchito', 'Funes', 'hola123456', 'panchitofunes@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -141,6 +186,13 @@ ALTER TABLE `income`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
+-- Indexes for table `limite_mensual`
+--
+ALTER TABLE `limite_mensual`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_monthly_limit` (`id_usuario`,`año`,`mes`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -161,19 +213,25 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id_egreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_egreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-  MODIFY `id_ingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_ingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `limite_mensual`
+--
+ALTER TABLE `limite_mensual`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
