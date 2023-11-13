@@ -77,6 +77,9 @@ class UserController {
 
     try {
       const [limit] = await User.getMonthlyLimit(userId, year, month)
+
+      if (!limit) return res.json({ message: 'No limit set' })
+
       res.json(limit)
     } catch (err) {
       console.error(err)

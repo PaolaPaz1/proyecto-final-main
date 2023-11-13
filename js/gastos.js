@@ -13,7 +13,7 @@ document.getElementById('egresoForm').addEventListener('submit', async (e) => {
   const category = document.getElementById('categorias').value
   const date = document.getElementById('fecha').value
 
-  const data = {
+  const datafe1 = {
     userId,
     amount,
     description,
@@ -21,6 +21,35 @@ document.getElementById('egresoForm').addEventListener('submit', async (e) => {
     date
   }
 
+  const datafe2 = {
+    userId,
+    year: parseInt(date.split('-')[0]),
+    month: parseInt(date.split('-')[1])
+  }
+
+  await fetch('http://localhost:3000/expenses/check-monthly-limit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(datafe2)
+  })
+    .then(response => response.json())
+    .then(data => {
+      if ((parseFloat(data.total) + parseFloat(amount)) < data.limit || !data) {
+        newExpense(datafe1)
+      } else {
+        mensajeError.innerHTML = 'El monto ingresado supera el límite mensual'
+        setTimeout(() => {
+          mensajeError.innerHTML = ''
+        }, 2000)
+      }
+    })
+
+  e.target.reset()
+})
+
+const newExpense = async (data) => {
   await fetch('http://localhost:3000/expenses/new-expense', {
     method: 'POST',
     headers: {
@@ -42,6 +71,4 @@ document.getElementById('egresoForm').addEventListener('submit', async (e) => {
         mensajeError.innerHTML = ''
       }, 2000)
     })
-
-  e.target.reset()
-})
+}

@@ -80,9 +80,11 @@ class Expense {
       WHERE id_usuario = ? AND año = ? AND mes = ?`, [userId, year, month]
     )
 
-    if (!limit[0].limite) return false
+    if (!limit[0]) return false
 
-    if (expenses[0].total > limit[0].limite) return true
+    const result = { total: expenses[0].total, limit: limit[0].limite }
+
+    if (expenses[0].total > limit[0].limite) return result
 
     return false
   }

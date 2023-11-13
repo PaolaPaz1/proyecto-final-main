@@ -56,7 +56,9 @@ const getMonthlyLimit = () => {
   })
     .then(res => res.json())
     .then(data => {
-      if (data) {
+      if (data.message) {
+        p.innerHTML = data.message
+      } else {
         p.innerHTML = `Tu límite mensual es de $${data.limite}`
       }
     })
