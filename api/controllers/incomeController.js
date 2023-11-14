@@ -6,7 +6,7 @@ class IncomeController {
 
     try {
       await Income.newIncome(userId, amount, description, category, date)
-      res.json({ message: 'Income created' })
+      res.json({ message: 'Ingreso creado' })
     } catch (err) {
       console.error(err)
       res.status(500).json({ error: err.message })

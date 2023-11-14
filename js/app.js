@@ -21,8 +21,8 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
       .then(response => response.json())
       .then(data => {
-        if (!data.userId) {
-          errorMessage.innerHTML = 'Credenciales incorrectas'
+        if (data.error) {
+          errorMessage.innerHTML = data.error
           setTimeout(() => {
             errorMessage.innerHTML = ''
           }, 2000)

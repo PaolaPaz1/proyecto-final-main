@@ -26,14 +26,6 @@ export const Sidebar = () => {
 
     <div class="bottom-content">
       <li class=""><a href="#" id="cerrarSesion"><i class="bx bx-log-out icon"></i><span class="text nav-text">Cerrar Sesión</span></a></li>
-      <li class="mode">
-        <div class="sun-moon">
-          <i class="bx bx-moon icon moon"></i>
-          <i class="bx bx-sun icon sun"></i>
-        </div>
-          <span class="mode-text text">Modo oscuro</span>
-          <div class="toggle-switch"><span class="switch"></span></div>
-      </li>
     </div>
   </div>
   `
@@ -48,20 +40,8 @@ export const Sidebar = () => {
 
 export const initSidebarEvents = (sidebarElement) => {
   const toggle = sidebarElement.querySelector('.toggle')
-  const modeSwitch = sidebarElement.querySelector('.toggle-switch')
-  const modeText = sidebarElement.querySelector('.mode-text')
 
   toggle.addEventListener('click', () => {
     sidebarElement.classList.toggle('close')
-  })
-
-  modeSwitch.addEventListener('click', () => {
-    document.body.classList.toggle('dark')
-
-    if (document.body.classList.contains('dark')) {
-      modeText.innerText = 'Light mode'
-    } else {
-      modeText.innerText = 'Dark mode'
-    }
   })
 }

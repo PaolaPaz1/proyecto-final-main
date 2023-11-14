@@ -6,7 +6,7 @@ class ExpenseController {
 
     try {
       await Expense.newExpense(userId, amount, description, category, date)
-      res.json({ message: 'Expense created' })
+      res.json({ message: 'Egreso creado' })
     } catch (err) {
       console.error(err)
       res.status(500).json({ error: err.message })
