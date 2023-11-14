@@ -103,7 +103,7 @@ body{
 
 #contenido {
     position: fixed;
-    top: 80%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(15, 50, 72, 0.3);
