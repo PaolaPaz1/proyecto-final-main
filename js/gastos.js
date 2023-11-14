@@ -36,7 +36,7 @@ document.getElementById('egresoForm').addEventListener('submit', async (e) => {
   })
     .then(response => response.json())
     .then(data => {
-      if ((parseFloat(data.total) + parseFloat(amount)) < data.limit || !data) {
+      if (data === false || (parseFloat(data.total) + parseFloat(amount)) < data.limit) {
         newExpense(datafe1)
       } else {
         mensajeError.innerHTML = 'El monto ingresado supera el límite mensual'
