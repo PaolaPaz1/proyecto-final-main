@@ -5,8 +5,8 @@ main {
   justify-content: center;
   gap: 20px; /* Espacio entre las tablas y el resumen de datos */
   align-items: flex-start;
-  margin: 15px 0;
-  text-align: center;
+  margin: 10px 0;
+  text-align: end;
 }
 
 h1 {
@@ -17,6 +17,7 @@ h1 {
 .resumen {
   width: 100%; /* Ocupa todo el ancho disponible */
   text-align: center; /* Centra el texto dentro del div resumen */
+  background-color: #305D72;
 }
 
 /* Estilos para las recomendaciones */
@@ -44,7 +45,7 @@ h1 {
 #tabla1, #tabla2, #canva1, #canva2 {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Alinea la tabla al inicio (parte superior) del contenedor div */
+  align-items: flex-start; /
 }
 
 canvas {
@@ -52,6 +53,8 @@ canvas {
   min-width: 350px;
   max-width: 600px;
   margin: 0 auto;
+  align-items: end;
+  text-align: end;
 }
 
 .config-month {

@@ -7,22 +7,23 @@ table {
   border-collapse: separate;
   border-spacing: 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 
 .custom-table {
-  border-collapse: collapse;
+  border-collapse: separate;
   width: 50%;
 }
 
 .custom-table th, .custom-table td {
-  border: 1px solid #e1e1e1;
+  border: 1px solid #000000;
   padding: 12px 15px;
   text-align: left;
   font-size: 0.9em;
 }
 
 .custom-table th {
-  background-color: #007bff;
+  background-color: #305D72;
   color: white;
   font-weight: normal;
   letter-spacing: 1px;
@@ -37,7 +38,7 @@ table {
 }
 
 .custom-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #cacaca;
 }
 
 @media (max-width: 768px) {
