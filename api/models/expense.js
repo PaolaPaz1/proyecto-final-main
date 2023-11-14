@@ -82,11 +82,9 @@ class Expense {
 
     if (!limit[0]) return false
 
-    const result = { total: expenses[0].total, limit: limit[0].limite }
+    const result = { total: expenses[0].total || 0, limit: limit[0].limite }
 
-    if (expenses[0].total > limit[0].limite) return result
-
-    return false
+    return result
   }
 }
 
