@@ -11,13 +11,13 @@ main {
 
 h1 {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 /* Estilos para el resumen de datos */
 .resumen {
   width: 100%; /* Ocupa todo el ancho disponible */
   text-align: center; /* Centra el texto dentro del div resumen */
-  background-color: #305D72;
 }
 
 /* Estilos para las recomendaciones */

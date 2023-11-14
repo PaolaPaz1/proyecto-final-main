@@ -9,6 +9,7 @@ body {
 
 h1 {
   color: #333;
+  
 }
 
 /* Estilo para el formulario */
@@ -42,3 +43,16 @@ button {
   border: none;
   border-radius: 5px;
 }
+
+.banner1 {
+  float: right; /* Alinea el contenedor a la derecha */
+  padding-right: 80px;
+  padding-top: -100px;
+  /*margin-left: 20px; /* Puedes ajustar el margen según tus necesidades */
+}
+
+.banner1 img {
+  width: 350px; /* Establece el ancho de la imagen, ajusta según sea necesario */
+  height: auto; /* Mantiene la proporción original de la imagen */
+}
+
