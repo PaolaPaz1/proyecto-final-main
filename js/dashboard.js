@@ -66,27 +66,37 @@ const getTotalExpenses = (yearr, monthh) => {
     })
 }
 
-const getTotalIncomes = (yearr, monthh) => {
-  fetch('http://localhost:3000/incomes/get-total-incomes', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
-  })
-    .then(res => res.json())
-    .then(data => {
-      totalIncomes = parseFloat(data[0].total) ?? 0
-      const p = document.getElementById('income')
-      if (totalIncomes > 0) {
-        p.innerHTML = `Total de ingresos: $${totalIncomes}`
-        p.style.display = 'block'
-      } else {
-        p.style.display = 'none'
-      }
-      resumen.appendChild(p)
-      calcularTotal()
+const getTotalIncomes = async (yearr, monthh) => {
+  const p = document.getElementById('income')
+
+  try {
+    const response = await fetch('http://localhost:3000/incomes/get-total-incomes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
     })
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    totalIncomes = parseFloat(data[0].total) ?? 0
+
+    if (totalIncomes > 0) {
+      p.innerHTML = `Total de ingresos: $${totalIncomes}`
+      p.style.display = 'block'
+    } else {
+      p.style.display = 'none'
+    }
+
+    calcularTotal()
+  } catch (err) {
+    p.innerHTML = err.message || 'Ha ocurrido un error'
+  }
 }
 
 getTotalExpenses(new Date().getFullYear(), new Date().getMonth() + 1)
@@ -119,29 +129,38 @@ const calcularTotal = () => {
   resumen.appendChild(p)
 }
 
-const getIncomesByCategory = (yearr, monthh) => {
-  fetch('http://localhost:3000/incomes/get-incomes-by-category', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.length === 0) {
-        const ctx = document.getElementById('myChart-inc').getContext('2d')
-        createGraphic(ctx, ['Sin datos'], [0], 'Ingresado')
-        return
-      }
-
-      const categorias = data.map(item => item.categoria)
-      const cantidades = data.map(item => parseFloat(item.total))
-
-      const ctx = document.getElementById('myChart-inc').getContext('2d')
-
-      createGraphic(ctx, categorias, cantidades, 'Ingresado')
+const getIncomesByCategory = async (yearr, monthh) => {
+  try {
+    const response = await fetch('http://localhost:3000/incomes/get-incomes-by-category', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
     })
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    if (data.length === 0) {
+      const ctx = document.getElementById('myChart-inc').getContext('2d')
+      createGraphic(ctx, ['Sin datos'], [0], 'Ingresado')
+      return
+    }
+
+    const categorias = data.map(item => item.categoria)
+    const cantidades = data.map(item => parseFloat(item.total))
+
+    const ctx = document.getElementById('myChart-inc').getContext('2d')
+
+    createGraphic(ctx, categorias, cantidades, 'Ingresado')
+  } catch (err) {
+    const p = document.getElementById('error')
+    p.innerHTML = err.message || 'Ha ocurrido un error'
+  }
 }
 
 const getExpensesByCategory = (yearr, monthh) => {

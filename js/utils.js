@@ -67,21 +67,28 @@ function createTable (data, divId, limited = false) {
   targetDiv.appendChild(table)
 }
 
-export function getIncome (divId, limited = false, yearr = new Date().getFullYear(), monthh = new Date().getMonth() + 1) {
+export async function getIncome (divId, limited = false, yearr = new Date().getFullYear(), monthh = new Date().getMonth() + 1) {
   const endpoint = limited ? 'get-limited-incomes' : 'get-incomes'
 
-  fetch(`http://localhost:3000/incomes/${endpoint}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
-  })
-    .then(response => response.json())
-    .then(data => {
-      createTable(data, divId, limited)
+  try {
+    const response = await fetch(`http://localhost:3000/incomes/${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
     })
-    .catch(err => console.error(err))
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    createTable(data, divId, limited)
+  } catch (err) {
+    divId.innerHTML = err.message || 'Ha ocurrido un error'
+  }
 }
 
 export function getExpenses (divId, limited = false, yearr = new Date().getFullYear(), monthh = new Date().getMonth() + 1) {

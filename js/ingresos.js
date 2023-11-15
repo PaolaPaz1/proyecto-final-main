@@ -21,27 +21,29 @@ document.getElementById('ingresoForm').addEventListener('submit', async (e) => {
     date
   }
 
-  await fetch('http://localhost:3000/incomes/new-income', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-    .then(response => response.json())
-    .then(data => {
-      mensajeExito.innerHTML = data.message
-      setTimeout(() => {
-        mensajeExito.innerHTML = ''
-      }, 2000)
-      getIncome('myId')
+  try {
+    const response = await fetch('http://localhost:3000/incomes/new-income', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
     })
-    .catch(err => {
-      mensajeError.innerHTML = err.message
-      setTimeout(() => {
-        mensajeError.innerHTML = ''
-      }, 2000)
-    })
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const responseData = await response.json()
+
+    mensajeExito.innerHTML = responseData.message
+    setTimeout(() => {
+      mensajeExito.innerHTML = ''
+    }, 2000)
+    getIncome('myId')
+  } catch (err) {
+    mensajeError.innerHTML = err.message || 'Ha ocurrido un error'
+  }
 
   e.target.reset()
 })
