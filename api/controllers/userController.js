@@ -7,7 +7,7 @@ class UserController {
       if (!userId) return next(new Error('Id de usuario es requerido'))
 
       const user = await User.getById(userId)
-      if (user.length === 0) return res.status(404).json({ error: 'Usuario no encontrado' })
+      if (user.length === 0) return res.status(401).json({ error: 'Usuario no encontrado' })
 
       res.json(user)
     } catch (err) {
@@ -21,7 +21,7 @@ class UserController {
       if (!email || !password) return next(new Error('Correo y contraseña son requeridos'))
 
       const user = await User.login(email, password)
-      if (user.length === 0) return res.status(404).json({ error: 'Usuario no encontrado' })
+      if (user.length === 0) return res.status(401).json({ error: 'Usuario no encontrado' })
 
       res.json({ userId: user[0].id })
     } catch (err) {

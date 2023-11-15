@@ -23,18 +23,17 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     })
 
     if (!response.ok) {
-      throw new Error(`Error HTTP! Estado: ${response.status}`)
+      if (response.status === 401) {
+        throw new Error('Usuario no encontrado')
+      } else {
+        throw new Error(`Error HTTP! Estado: ${response.status}`)
+      }
     }
 
     const responseData = await response.json()
 
-    if (responseData.error) {
-      errorMessage.textContent = responseData.error
-      errorMessage.style.color = 'red'
-    } else {
-      localStorage.setItem('userId', responseData.userId)
-      window.location.href = './dashboard.html'
-    }
+    localStorage.setItem('userId', responseData.userId)
+    window.location.href = './dashboard.html'
   } catch (err) {
     errorMessage.textContent = err.message || 'Ha ocurrido un error'
     errorMessage.style.color = 'red'

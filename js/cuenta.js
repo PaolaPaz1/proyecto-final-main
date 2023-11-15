@@ -96,7 +96,11 @@ document.getElementById('edit-form').addEventListener('submit', async (event) =>
     })
 
     if (!response.ok) {
-      throw new Error(`Error HTTP! Estado: ${response.status}`)
+      if (response.status === 401) {
+        throw new Error('Usuario no encontrado')
+      } else {
+        throw new Error(`Error HTTP! Estado: ${response.status}`)
+      }
     }
 
     const data = await response.json()
