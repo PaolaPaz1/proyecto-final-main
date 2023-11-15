@@ -15,14 +15,22 @@ document.getElementById('form').addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'application/json' }
     })
 
-    if (response.status === 409) {
-      message.style.color = 'red'
-      message.textContent = 'User already exists'
-    } else {
-      message.style.color = 'green'
-      message.textContent = 'User created'
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
+
+    const responseData = await response.json()
+
+    if (responseData.error) {
+      message.style.color = 'red'
+      message.textContent = responseData.error
+      return
+    }
+
+    message.style.color = 'green'
+    message.textContent = responseData.message
   } catch (err) {
-    console.error(err)
+    message.style.color = 'red'
+    message.textContent = err.message || 'Ha ocurrido un error'
   }
 })

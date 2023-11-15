@@ -1,7 +1,7 @@
 import express from 'express'
 import IncomeController from '../controllers/incomeController.js'
 import cors from 'cors'
-import corsOptions from '../middleware/corsConfig.js'
+import corsOptions from '../middlewares/corsConfig.js'
 
 const routerIncome = express.Router()
 const incomeController = new IncomeController()

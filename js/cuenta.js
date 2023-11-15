@@ -3,23 +3,36 @@ const userId = localStorage.getItem('userId')
 const p = document.getElementById('message')
 
 const getUser = async () => {
-  await fetch(`http://localhost:3000/users/user?id=${userId}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      data.forEach(data => {
-        accountData.name = data.name
-        accountData.lastname = data.lastname
-        accountData.email = data.email
-        accountData.password = data.password
-      })
-
-      showAccountInfo()
+  try {
+    const response = await fetch(`http://localhost:3000/users/user?id=${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    if (data.error) {
+      p.textContent = data.error
+      return
+    }
+
+    data.forEach(d => {
+      accountData.name = d.name
+      accountData.lastname = d.lastname
+      accountData.email = d.email
+      accountData.password = d.password
+    })
+
+    showAccountInfo()
+  } catch (err) {
+    p.textContent = err.message || 'Ha ocurrido un error al obtener los datos del usuario.'
+  }
 }
 
 getUser()
@@ -58,39 +71,44 @@ function editAccount () {
 document.getElementById('edit-form').addEventListener('submit', async (event) => {
   event.preventDefault()
 
-  // Obtener los nuevos datos del formulario
   const newName = document.getElementById('name').value
   const newLastname = document.getElementById('lastname').value
   const newEmail = document.getElementById('email').value
   const newPassword = document.getElementById('password').value
 
-  // Actualizar los datos de la cuenta
   accountData.name = newName.trim()
   accountData.lastname = newLastname.trim()
   accountData.email = newEmail.trim()
   accountData.password = newPassword.trim()
 
-  await fetch(`http://localhost:3000/users/patch?id=${userId}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: newName,
-      lastname: newLastname,
-      email: newEmail,
-      password: newPassword
+  try {
+    const response = await fetch(`http://localhost:3000/users/patch?id=${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: newName,
+        lastname: newLastname,
+        email: newEmail,
+        password: newPassword
+      })
     })
-  })
-    .then(response => response.json())
-    .then(data => {
-      p.innerHTML = data.message
-      setTimeout(() => {
-        getUser()
-        showAccountInfo()
-        // Ocultar el formulario de edición
-        document.getElementById('account-info').style.display = 'block'
-        document.getElementById('edit-form').style.display = 'none'
-      }, 3000)
-    })
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const data = await response.json()
+    p.innerHTML = data.message
+
+    setTimeout(() => {
+      getUser()
+      showAccountInfo()
+      document.getElementById('account-info').style.display = 'block'
+      document.getElementById('edit-form').style.display = 'none'
+    }, 2000)
+  } catch (err) {
+    p.textContent = err.message || 'Ha ocurrido un error al actualizar los datos.'
+  }
 })

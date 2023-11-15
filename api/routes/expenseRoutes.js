@@ -1,7 +1,7 @@
 import express from 'express'
 import ExpenseController from '../controllers/expenseController.js'
 import cors from 'cors'
-import corsOptions from '../middleware/corsConfig.js'
+import corsOptions from '../middlewares/corsConfig.js'
 
 const routerExpense = express.Router()
 const expenseController = new ExpenseController()
