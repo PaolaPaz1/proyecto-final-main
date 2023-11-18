@@ -51,12 +51,19 @@ button:hover {
 
 /* Estilo para los mensajes de éxito y error */
 #mensajeExito {
-  margin-top: 10px;
+  margin: 10px 0;
   font-weight: bold;
+  color: green;
 }
 
 #mensajeError {
-  margin-top: 10px;
+  margin: 10px 0;
   font-weight: bold;
   color: red;
+}
+
+#mensajeAviso {
+  margin: 10px 0;
+  font-weight: bold;
+  color: orange;
 }

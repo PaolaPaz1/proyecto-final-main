@@ -21,6 +21,7 @@ export const Sidebar = () => {
         <li class="nav-link"><a href="gastos.html"><i class="bx bx-wallet icon"></i><span class="text nav-text">Egresos</span></a></li>
         <li class="nav-link"><a href="analisis.html"><i class="bx bx-pie-chart-alt icon"></i><span class="text nav-text">Análisis</span></a></li>
         <li class="nav-link"><a href="recomendaciones.html"><i class="bx bx-heart icon"></i><span class="text nav-text">Limite Mensual</span></a></li>
+        <li class="nav-link"><a href="ahorro.html"><i class="bx bx-dollar icon"></i><span class="text nav-text">Ahorro Mensual</span></a></li>
       </ul>
     </div>
 
