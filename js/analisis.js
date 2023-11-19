@@ -47,25 +47,34 @@ changeMonth.addEventListener('click', () => {
 let totalExpenses = 0
 let totalIncomes = 0
 
-const getTotalExpenses = (yearr, monthh) => {
-  fetch('http://localhost:3000/expenses/get-total-expenses', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
-  })
-    .then(res => res.json())
-    .then(data => {
-      totalExpenses = parseFloat(data[0].total) ?? 0
-      const p = document.getElementById('expense')
-      if (totalExpenses > 0) {
-        p.innerHTML = `Total de gastos: $${totalExpenses}`
-        p.style.display = 'block'
-      } else {
-        p.style.display = 'none'
-      }
+const getTotalExpenses = async (yearr, monthh) => {
+  const p = document.getElementById('expense')
+
+  try {
+    const response = await fetch('http://localhost:3000/expenses/get-total-expenses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId: localStorage.getItem('userId'), year: yearr, month: monthh })
     })
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    totalExpenses = parseFloat(data[0].total) ?? 0
+    if (totalExpenses > 0) {
+      p.innerHTML = `Total de gastos: $${totalExpenses}`
+      p.style.display = 'block'
+    } else {
+      p.style.display = 'none'
+    }
+  } catch (err) {
+    p.innerHTML = err.message || 'Ha ocurrido un error'
+  }
 }
 
 const getTotalIncomes = async (yearr, monthh) => {

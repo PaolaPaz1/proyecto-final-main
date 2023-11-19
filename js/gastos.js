@@ -6,27 +6,32 @@ const mensajeError = document.getElementById('mensajeError')
 const mensajeAviso = document.getElementById('mensajeAviso')
 
 const newExpense = async (data) => {
-  await fetch('http://localhost:3000/expenses/new-expense', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-    .then(response => response.json())
-    .then(data => {
-      mensajeExito.innerHTML = data.message
-      setTimeout(() => {
-        mensajeExito.innerHTML = ''
-      }, 2000)
-      getExpenses('myId')
+  try {
+    const response = await fetch('http://localhost:3000/expenses/new-expense', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
     })
-    .catch(err => {
-      mensajeError.innerHTML = err.message
-      setTimeout(() => {
-        mensajeError.innerHTML = ''
-      }, 2000)
-    })
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP! Estado: ${response.status}`)
+    }
+
+    const responseData = await response.json()
+
+    mensajeExito.innerHTML = responseData.message
+    setTimeout(() => {
+      mensajeExito.innerHTML = ''
+    }, 2000)
+    getExpenses('myId')
+  } catch (err) {
+    mensajeError.innerHTML = err.message || 'Ha ocurrido un error'
+    setTimeout(() => {
+      mensajeError.innerHTML = ''
+    }, 2000)
+  }
 }
 
 const checkMonthlyLimit = async (data) => {
