@@ -1,7 +1,9 @@
+// Origins permitidos para hacer peticiones a la API
 const allowedOrigins = [
   'http://localhost:5173'
 ]
 
+// Opciones de configuración de CORS
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin)) {

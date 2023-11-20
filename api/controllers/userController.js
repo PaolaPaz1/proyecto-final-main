@@ -1,6 +1,19 @@
-import User from '../models/user.js'
+import User from '../models/user.js' // Importar el modelo de usuario
 
+/*
+  - Es necesario importar el modelo de usuario para poder usar
+  los métodos de la clase User
+  - Por ejemplo: const UserController = new UserController()
+  - Se utiliza async/await para que las consultas a la base de datos
+  se ejecuten de forma asíncrona
+  - req: contiene la información de la solicitud HTTP
+  - res: contiene la información de la respuesta HTTP
+  - next: es una función que se ejecuta cuando se termina de ejecutar
+  el controlador, y que se utiliza para pasar el control al siguiente
+  middleware o controlador
+*/
 class UserController {
+  // Retorna los datos del usuario con el id especificado
   async getUser (req, res, next) {
     try {
       const userId = req.query.id
@@ -15,6 +28,7 @@ class UserController {
     }
   }
 
+  // Inicia sesión con el usuario y contraseña especificados
   async loginUser (req, res, next) {
     try {
       const { email, password } = req.body
@@ -30,6 +44,7 @@ class UserController {
     }
   }
 
+  // Registra un nuevo usuario
   async registerUser (req, res, next) {
     try {
       const { name, lastname, email, password } = req.body
@@ -42,6 +57,7 @@ class UserController {
     }
   }
 
+  // Actualiza un usuario
   async patchUser (req, res, next) {
     try {
       const { id } = req.query
@@ -55,6 +71,7 @@ class UserController {
     }
   }
 
+  // Establece el límite mensual del usuario con el id especificado
   async setMonthlyLimit (req, res, next) {
     try {
       const { userId, limit, year, month } = req.body
@@ -67,6 +84,7 @@ class UserController {
     }
   }
 
+  // Retorna el límite mensual del usuario con el id especificado
   async getMonthlyLimit (req, res, next) {
     try {
       const { userId, year, month } = req.body

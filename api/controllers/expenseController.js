@@ -1,6 +1,19 @@
-import Expense from '../models/expense.js'
+import Expense from '../models/expense.js' // Importar el modelo de egreso
 
+/*
+  - Es necesario importar el modelo de egreso para poder usar
+  los métodos de la clase Expense
+  - Por ejemplo: const ExpenseController = new ExpenseController()
+  - Se utiliza async/await para que las consultas a la base de datos
+  se ejecuten de forma asíncrona
+  - req: contiene la información de la solicitud HTTP
+  - res: contiene la información de la respuesta HTTP
+  - next: es una función que se ejecuta cuando se termina de ejecutar
+  el controlador, y que se utiliza para pasar el control al siguiente
+  middleware o controlador
+*/
 class ExpenseController {
+  // Registra un nuevo egreso
   async newExpense (req, res, next) {
     try {
       const { userId, amount, description, category, date } = req.body
@@ -12,6 +25,7 @@ class ExpenseController {
     }
   }
 
+  // Retorna los egresos del usuario con el id especificado
   async getExpenses (req, res, next) {
     try {
       const { userId, year, month } = req.body
@@ -25,6 +39,7 @@ class ExpenseController {
     }
   }
 
+  // Retorna los 5 egresos más altos del usuario con el id especificado
   async getLimitedExpenses (req, res, next) {
     try {
       const { userId, year, month } = req.body
@@ -38,6 +53,7 @@ class ExpenseController {
     }
   }
 
+  // Retorna el total de egresos del usuario con el id especificado
   async getTotalExpenses (req, res, next) {
     try {
       const { userId, year, month } = req.body
@@ -51,6 +67,7 @@ class ExpenseController {
     }
   }
 
+  // Retorna los egresos agrupados por categoría del usuario con el id especificado
   async getExpensesByCategory (req, res, next) {
     try {
       const { userId, year, month } = req.body
@@ -64,6 +81,7 @@ class ExpenseController {
     }
   }
 
+  // Evalúa si el usuario con el id especificado ha superado su límite mensual de egresos
   async checkMonthlyLimitExp (req, res, next) {
     try {
       const { userId, year, month } = req.body

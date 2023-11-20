@@ -1,6 +1,14 @@
-import db from '../database.js'
+import db from '../database.js' // Importar la conexión a la base de datos
 
+/*
+  Se usa la palabra clave static para que los métodos de la clase
+  puedan ser llamados sin necesidad de instanciar la clase
+  Por ejemplo: User.getById(1)
+  Se utiliza async/await para que las consultas a la base de datos
+  se ejecuten de forma asíncrona
+*/
 class User {
+  // Retorna los datos del usuario con el id especificado
   static async getById (id) {
     const [user] = await db.execute(
       `SELECT 
@@ -15,6 +23,7 @@ class User {
     return user
   }
 
+  // Inicia sesión con el usuario y contraseña especificados
   static async login (email, password) {
     const [user] = await db.execute(
       `SELECT
@@ -28,6 +37,7 @@ class User {
     return user
   }
 
+  // Registra un nuevo usuario
   static async register (name, lastname, email, password) {
     const [user] = await db.execute(
       `SELECT
@@ -48,6 +58,7 @@ class User {
     )
   }
 
+  // Actualiza los datos del usuario con el id especificado
   static async update (id, name, lastname, email, password) {
     await db.execute(
       `UPDATE users
@@ -60,6 +71,7 @@ class User {
     )
   }
 
+  // Actualiza el límite mensual del usuario con el id especificado
   static async setMonthlyLimit (userId, limit, year, month) {
     await db.execute(
       `INSERT INTO limite_mensual
@@ -70,6 +82,7 @@ class User {
     )
   }
 
+  // Retorna el límite mensual del usuario con el id especificado
   static async getMonthlyLimit (userId, year, month) {
     const [limit] = await db.execute(
       `SELECT
