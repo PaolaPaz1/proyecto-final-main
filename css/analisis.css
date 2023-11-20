@@ -64,3 +64,18 @@ canvas {
   flex-direction: column;
   margin: 10px 0;
 }
+
+.contacto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+
+.contacto img {
+  width: 250px;
+  height: auto;
+  margin: 0 10px;
+}
